@@ -117,7 +117,7 @@ RSpec.describe Merchant, type: :model do
 
       expected = [@merchant_2.items.second, @merchant_2.items.third, @merchant_2.items.first, @merchant_2.items.fourth, @merchant_2.items.fifth]
       # actual = @merchant_2.top_5_items.map { | x | x[:name]}
-      expect(@merchant_2.items.top_5_items).to eq(expected)
+      expect(@merchant_2.top_5_items).to eq(expected)
     end
   end
 end
