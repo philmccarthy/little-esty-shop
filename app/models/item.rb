@@ -5,15 +5,14 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   enum status: [ :disabled, :enabled ]
 
-
-  def self.top_5_items
-    joins(:transactions)
-    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
-    .where('transactions.result = ?', 1)
-    .group('items.id')
-    .order('total_revenue DESC')
-    .limit(5)
-  end
+  # def self.top_5_items
+  #   joins(:transactions)
+  #   .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+  #   .where('transactions.result = ?', 1)
+  #   .group('items.id')
+  #   .order('total_revenue DESC')
+  #   .limit(5)
+  # end
 
   def best_day
     invoices.select('invoices.created_at AS created_at, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
