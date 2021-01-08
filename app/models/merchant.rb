@@ -24,9 +24,11 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+  # changed association call to items and joins to transactions so the query returns items instead of transactions. 
+  # Allows item.best_day to be called in the item index view
   def top_5_items
-    transactions
-      .joins(invoice: :items)
+    items
+    .joins(invoices: :transactions) 
       .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
       .where('transactions.result = ?', 1)
       .group('items.id')
