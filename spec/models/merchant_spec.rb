@@ -6,6 +6,8 @@ RSpec.describe Merchant, type: :model do
     Customer.destroy_all
     Transaction.destroy_all
     Invoice.destroy_all
+    Item.destroy_all
+    InvoiceItem.destroy_all
 
     @merchant = create(:merchant)
 
@@ -47,18 +49,32 @@ RSpec.describe Merchant, type: :model do
     @invoice_10 = create(:invoice, merchant: @merchant, customer: @customer_6)
     create(:transaction, result: 1, invoice: @invoice_9)
 
-    create_list(:item, 3, merchant: @merchant)
+    create_list(:item, 6, merchant: @merchant)
 
     5.times do
-      create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
+      create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2, quantity: 10, unit_price: 3)
     end
 
     5.times do
-      create(:invoice_item, item: Item.second, invoice: Invoice.all.sample, status: 1)
+      create(:invoice_item, item: Item.second, invoice: Invoice.all.sample, status: 1, quantity: 10, unit_price: 4)
     end
 
     5.times do
-      create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0)
+      create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0, quantity: 10, unit_price: 3)
+    end
+  end
+
+  describe 'class methods' do
+    before :each do
+      @merchant1 = create(:merchant, status: 0)
+      @merchant2 = create(:merchant, status: 0)
+      @merchant3 = create(:merchant, status: 1)
+    end
+    it '::enabled' do
+      expect(Merchant.enabled).to eq([@merchant3])
+    end
+    it '::disabled' do
+      expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])
     end
   end
 
@@ -74,18 +90,10 @@ RSpec.describe Merchant, type: :model do
       expected = @merchant.ready_to_ship
       expect(expected.length).to eq(10)
     end
-  end
-  describe 'class methods' do
-    before :each do
-      @merchant1 = create(:merchant, status: 0)
-      @merchant2 = create(:merchant, status: 0)
-      @merchant3 = create(:merchant, status: 1)
-    end
-    it '::enabled' do
-      expect(Merchant.enabled).to eq([@merchant3])
-    end
-    it '::disabled' do
-      expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])
+
+    it '#top_5_items' do
+      # @merchant.top_5_items
+      # expect(@merchant.top_5_items).to eq()
     end
   end
 end
