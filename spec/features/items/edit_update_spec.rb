@@ -80,7 +80,24 @@ RSpec.describe 'merchants can update items', type: :feature do
       click_button("Update Item")
       expect(current_path).to eq(merchant_item_path(@merchant.id, item.id))
       expect(page).to have_content("Item successfully updated")
+    end
 
+    it 'displays flash message if validations fail' do
+      item = @merchant.items.first
+      visit merchant_item_path(@merchant.id, item.id)
+
+      click_on 'Edit Item'
+
+      expect(current_path).to eq(edit_merchant_item_path(@merchant.id, item.id))
+      expect(page).to have_field('item[name]', with: "#{item.name}")
+
+      fill_in 'item[name]', with: "fruit"
+      fill_in 'item[description]', with: "not a real fruit"
+      fill_in 'item[unit_price]', with: "xxxx"
+
+      click_button("Update Item")
+      expect(current_path).to eq(merchant_item_path(@merchant.id, item.id))
+      expect(page).to have_content("[\"Unit price is not a number\"]")
     end
   end
 end
