@@ -10,33 +10,31 @@ class ItemsController < ApplicationController
 
   def edit
   end
-
-  def update
-    if item_params[:status]
-      @item.update!(item_params)
-      redirect_to merchant_items_path(params[:merchant_id])
-    elsif @item.update!(item_params)
-      flash[:notice] = "Item successfully updated"
-      redirect_to merchant_item_path(@item.merchant_id, @item.id)
-    else
-      flash.now[:notice] = "Error, try again."
-      render edit, action: @item
-    end
-  end
-
+  
   def new
     @item = Item.new
   end
 
   def create
-    @merchant.items.create!(item_params)
+    @merchant.items.create(item_params)
     redirect_to merchant_items_path(params[:merchant_id])
+  end
+
+  def update
+    if @item.update(item_params)
+      flash[:notice] = "Item successfully updated"
+      redirect_to merchant_item_path(@item.merchant_id, @item.id)
+    else
+      flash[:error] = @item.errors.full_messages
+      set_item
+      render :edit 
+    end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price, :status)
+    params.require(:item).permit(:name, :description, :unit_price)
   end
 
   def set_item

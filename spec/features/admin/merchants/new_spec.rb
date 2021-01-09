@@ -10,5 +10,14 @@ RSpec.describe 'Admin Merchants Show' do
       expect(current_path).to eq(admin_merchants_path(@merchant_1))
       expect(page).to have_content('Test')
     end
+
+    it 'displays flash message if validations fail' do
+      visit new_admin_merchant_path
+      fill_in 'Name', with: ''
+      click_on 'Create Merchant'
+
+      expect(current_path).to eq(admin_merchants_path(@merchant_1))
+      expect(page).to have_content("Merchant was not created successfully!")
+    end
   end
 end
