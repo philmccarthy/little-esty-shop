@@ -35,6 +35,7 @@ class Merchant < ApplicationRecord
       .group('items.id')
       .order('total_revenue desc')
       .limit(5)
+  end
 
   def self.top_5_merchants
     joins([invoices: :transactions], :invoice_items)
