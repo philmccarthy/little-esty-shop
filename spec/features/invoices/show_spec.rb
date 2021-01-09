@@ -94,10 +94,17 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       expect(page).to have_content("Total Revenue: #{@invoice_9.total_revenue}")
     end
 
-    xit 'can enable/disable status of item' do
+    it 'can enable/disable status of item' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
       save_and_open_page
-      expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
+      within("#status-#{@invoice_9.items.first.id}") do
+
+        expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")
+        select("enable", from: "invoice[status]")
+        click_button "Submit"
+
+        expect(@invoice_9.items.first.status).to eq("Enabled")
+      end
 
       click_on 'Submit'
       expect(page).to have_field('item[status]', with: "#{@invoice_9.items.first.status}")

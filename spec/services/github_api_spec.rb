@@ -21,7 +21,6 @@ feature 'External request' do
          	  'User-Agent'=>'Ruby'
              }).
            to_return(status: 200, body: "little-esty-shop", headers: {})
-    # repo = GithubApi.new
     uri = URI("https://api.github.com/repos/elyhess/little-esty-shop")
     response = Net::HTTP.get(uri)
 
@@ -36,7 +35,6 @@ feature 'External request' do
             'User-Agent'=>'Ruby'
              }).
            to_return(status: 200, body: "32", headers: {})
-    # repo = GithubApi.new
     uri = URI("https://api.github.com/repos/elyhess/little-esty-shop/commits")
     response = Net::HTTP.get(uri).to_i
 
@@ -51,7 +49,6 @@ feature 'External request' do
             'User-Agent'=>'Ruby'
              }).
            to_return(status: 200, body: "6", headers: {})
-    # repo = GithubApi.new
     uri = URI("https://api.github.com/repos/elyhess/little-esty-shop/Pulls?state=closed")
     response = Net::HTTP.get(uri).to_i
 
@@ -67,7 +64,6 @@ feature 'External request' do
             'User-Agent'=>'Ruby'
              }).
            to_return(status: 200, body: collabs, headers: {})
-    # repo = GithubApi.new
     uri = URI("https://api.github.com/repos/elyhess/little-esty-shop/collaborators")
     response = Net::HTTP.get(uri)
 

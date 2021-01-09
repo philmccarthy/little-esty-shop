@@ -27,13 +27,15 @@
     </tr>
     <tr>
     <% @invoice.invoice_items.each do |invitem| %>
-      <td><%= invitem.item.name %></td>
-      <td><%= invitem.quantity %></td>
-      <td><%= invitem.unit_price %></td>
-      <td><%= form_with model: invitem, method: :patch, url: merchant_invoice_item_path(@invoice.merchant_id, invitem.id), local: true do |f| %>
+      <div id="status-<%= invitem.id %>">
+        <td><%= invitem.item.name %></td>
+        <td><%= invitem.quantity %></td>
+        <td><%= invitem.unit_price %></td>
+        <td><%= form_with model: invitem, method: :patch, url: merchant_invoice_item_path(@invoice.merchant_id, invitem.id), local: true do |f| %>
           <%= f.select :status, enum_collection_for_select(InvoiceItem.statuses), selected: invitem.status  %>
           <%= button_tag 'Submit' %>
-          <% end %></td>
+        <% end %></td>
+      </div>
     </tr>
     <% end %>
   </table>

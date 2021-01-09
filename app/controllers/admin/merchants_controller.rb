@@ -6,7 +6,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants_disabled = Merchant.disabled
     @top_5_merchants = Merchant.top_5_merchants
   end
-  
+
   def show
   end
 
@@ -39,8 +39,9 @@ class Admin::MerchantsController < ApplicationController
       end
     else
       flash[:error] = @merchant.errors.full_messages
+      binding.pry
       @merchant = Merchant.find(params[:id])
-      render :edit 
+      render :edit
     end
   end
 
@@ -49,9 +50,9 @@ class Admin::MerchantsController < ApplicationController
   def set_merchant
     @merchant = Merchant.find(params[:id])
   end
-  
+
   def merchant_params
     params.require(:merchant).permit(:name, :status)
   end
-  
+
 end

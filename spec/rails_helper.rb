@@ -8,7 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'webmock/rspec'
-
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # Add additional requires below this line. Rails is not loaded until this point!
 RSpec.configure do |config|

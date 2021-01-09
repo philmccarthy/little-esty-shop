@@ -8,4 +8,14 @@ class GithubApi
     response = @conn.get("/repos/elyhess/little-esty-shop#{arg}")
     github = JSON.parse(response.body, :symbolize_names => true)
   end
+
+  def count
+    call("/pulls?state=closed").count
+  end
+
+  def names
+    call("/commits").map do |commit|
+      commit[:author][:login]
+    end.uniq
+  end
 end
