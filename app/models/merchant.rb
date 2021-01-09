@@ -1,9 +1,12 @@
 class Merchant < ApplicationRecord
+  validates_presence_of :name
+
   has_many :items, dependent: :destroy
   has_many :invoices, dependent: :destroy
   has_many :invoice_items, through: :invoices
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
+  
   enum status: [:disabled, :enabled]
 
   def ready_to_ship
@@ -32,6 +35,14 @@ class Merchant < ApplicationRecord
       .group('items.id')
       .order('total_revenue desc')
       .limit(5)
+
+  def self.top_5_merchants
+    joins([invoices: :transactions], :invoice_items)
+    .select('merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
+    .where("transactions.result = ?", 1)
+    .order(total_revenue: :desc)
+    .group("merchants.id")
+    .limit(5)
   end
 
   def best_day

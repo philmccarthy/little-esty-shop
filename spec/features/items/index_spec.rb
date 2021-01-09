@@ -64,7 +64,7 @@ RSpec.describe 'merchants items index page', type: :feature do
     it 'can list all item names for specific merchant' do
       visit merchant_items_path(@merchant)
       expected = Item.where(merchant: @merchant).pluck(:name)
-      
+
       expect(page).to have_content("#{expected[0]}")
       expect(page).to have_content("#{expected[1]}")
       expect(page).to have_content("#{expected[2]}")

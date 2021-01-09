@@ -2,9 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
   describe 'validations' do
+    it 'name has to be a string' do
+      customer = Customer.new(first_name: 1, last_name: 'bob')
+      customer1 = Customer.new(first_name: "x", last_name: 1)
+      expect(customer.save).to eq(false)
+      expect(customer1.save).to eq(false)
+    end
   end
 
   describe 'relationships' do
+    it { should have_many :invoices }
+    it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:merchants).through(:invoices) }
+    it { should have_many(:invoice_items).through(:invoices) }
+    it { should have_many(:items).through(:invoice_items)}
   end
 
   describe 'instance methods' do

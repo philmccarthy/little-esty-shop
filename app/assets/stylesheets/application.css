@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ #footer {
+   font-size: 10px;
+ }
  table, th, td {
    border: 1px solid black;
    text-align: left;
@@ -20,4 +24,5 @@
  }
  th {
    font-weight: 900;
+
  }
