@@ -45,7 +45,6 @@ group :development, :test do
   gem "capybara", github: "DocSpring/capybara", branch: :crash_on_deprecations
   gem "launchy"
   gem "simplecov"
-  gem "nyan-cat-formatter"
   gem "shoulda-matchers"
   gem "orderly"
   gem "rails-erd"
