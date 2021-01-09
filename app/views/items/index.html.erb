@@ -28,3 +28,15 @@
   <% end %>
   </ul>
 </section>
+
+<section id="top-items">
+  <h3>Top Items</h3>
+  <ol>
+    <% @merchant.top_5_items.each do |item| %>
+      <li>
+        <%= item.name %> - $<%= number_with_delimiter(item.total_revenue, delimiter: ',') %> in sales
+        <p><%= "Top day for #{item.name} was #{item.best_day}" %>
+      </li>
+    <% end %>
+  </ol>
+</section>
