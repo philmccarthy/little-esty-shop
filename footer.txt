@@ -1,0 +1,15 @@
+<footer id="footer">
+  <% repo = GithubApi.new %>
+  <p>Repo Name:
+    <%= repo.call("")[:name] %>
+    All Merged PR's:
+    <%= repo.call("pulls?state=closed").count %>
+    Collaborators:
+    <% names = repo.call("/commits").map {|commit| commit[:author][:login]}.uniq %>
+    <% names.each do |name| %>
+      <%= name %>
+      Commits:
+      <%= repo.call("/commits?author=#{name}").count %>
+    <% end %>
+  </p>
+</footer>

@@ -1,7 +1,6 @@
 class GithubApi
   def repo
     @conn = Faraday.new(url: "https://api.github.com")
-    @conn.basic_auth('apikey', ENV['project_access_key'])
   end
 
   def call(arg)
