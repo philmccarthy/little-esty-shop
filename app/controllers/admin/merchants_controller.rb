@@ -6,7 +6,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants_disabled = Merchant.disabled
     @top_5_merchants = Merchant.top_5_merchants
   end
-  
+
   def show
   end
   
@@ -44,9 +44,9 @@ class Admin::MerchantsController < ApplicationController
   def set_merchant
     @merchant = Merchant.find(params[:id])
   end
-  
+
   def merchant_params
     params.require(:merchant).permit(:name)
   end
-  
+
 end
