@@ -24,8 +24,6 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
-  # changed association call to items and joins to transactions so the query returns items instead of transactions. 
-  # Allows item.best_day to be called in the item index view
   def top_5_items
     items
     .joins(invoices: :transactions) 
