@@ -33,7 +33,7 @@ class Admin::MerchantsController < ApplicationController
       flash.notice = "Merchant #{@merchant.name} was updated successfully!"
       redirect_to admin_merchant_path(@merchant)
     else
-      flash[:error] = @merchant.errors.full_messages
+      flash[:error] = @merchant.errors.full_messages.first
       set_merchant
       render :edit 
     end
