@@ -12,6 +12,7 @@ RSpec.describe 'Admin Merchants Show' do
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
       expect(page).to have_content('Test')
+      save_and_open_page
       expect(page).to have_content("Merchant Test was updated successfully!")
     end
     

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :repos
-=======
   namespace :admin do
     resources :merchants, except: [:destoy]
     resources :invoices, only: [:index, :show, :update]
@@ -16,5 +14,4 @@ Rails.application.routes.draw do
   end
 
   resources :admin, controller: 'admin/dashboard', only: [:index]
->>>>>>> f27acbc9cb8bb655190c3c77fcf71bbe3333a014
 end
