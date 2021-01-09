@@ -18,7 +18,7 @@ describe 'As an visitor' do
         expect(page).to have_content(@invoice_2.id)
         expect(page).to have_content(@invoice_3.id)
 
-        click_on @invoice_1.id
+        click_on "#{@invoice_1.id}"
         expect(current_path).to eq(admin_invoice_path(@invoice_1))
       end
     end
