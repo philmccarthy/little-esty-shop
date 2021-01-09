@@ -10,11 +10,17 @@
   </head>
 
   <body>
-  <p class="flash">
-    <% flash.each do |type, message| %>
-      <p><%= message %></p>
-    <% end %>
-  </p>
+    <section id="flash-message">
+      <% flash.each do |type, messages| %>
+        <% if messages.respond_to?('each') %>
+          <% messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        <% else %>
+          <p><%= messages %></p>
+        <% end %>
+      <% end %>
+    </section>
     <%= yield %>
 
   </body>

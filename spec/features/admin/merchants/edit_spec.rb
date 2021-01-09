@@ -21,7 +21,7 @@ RSpec.describe 'Admin Merchants Show' do
       click_on 'Update Merchant'
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
-      expect(page).to have_content("[\"Name can't be blank\"]")
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end
