@@ -1,4 +1,12 @@
                    Prefix Verb   URI Pattern                                                                              Controller#Action
+                    repos GET    /repos(.:format)                                                                         repos#index
+                          POST   /repos(.:format)                                                                         repos#create
+                 new_repo GET    /repos/new(.:format)                                                                     repos#new
+                edit_repo GET    /repos/:id/edit(.:format)                                                                repos#edit
+                     repo GET    /repos/:id(.:format)                                                                     repos#show
+                          PATCH  /repos/:id(.:format)                                                                     repos#update
+                          PUT    /repos/:id(.:format)                                                                     repos#update
+                          DELETE /repos/:id(.:format)                                                                     repos#destroy
           admin_merchants GET    /admin/merchants(.:format)                                                               admin/merchants#index
                           POST   /admin/merchants(.:format)                                                               admin/merchants#create
        new_admin_merchant GET    /admin/merchants/new(.:format)                                                           admin/merchants#new
@@ -7,14 +15,12 @@
                           PATCH  /admin/merchants/:id(.:format)                                                           admin/merchants#update
                           PUT    /admin/merchants/:id(.:format)                                                           admin/merchants#update
                           DELETE /admin/merchants/:id(.:format)                                                           admin/merchants#destroy
+   admin_merchants_status PATCH  /admin/merchants_status/:id(.:format)                                                    admin/merchants_status#update
+                          PUT    /admin/merchants_status/:id(.:format)                                                    admin/merchants_status#update
            admin_invoices GET    /admin/invoices(.:format)                                                                admin/invoices#index
-                          POST   /admin/invoices(.:format)                                                                admin/invoices#create
-        new_admin_invoice GET    /admin/invoices/new(.:format)                                                            admin/invoices#new
-       edit_admin_invoice GET    /admin/invoices/:id/edit(.:format)                                                       admin/invoices#edit
             admin_invoice GET    /admin/invoices/:id(.:format)                                                            admin/invoices#show
                           PATCH  /admin/invoices/:id(.:format)                                                            admin/invoices#update
                           PUT    /admin/invoices/:id(.:format)                                                            admin/invoices#update
-                          DELETE /admin/invoices/:id(.:format)                                                            admin/invoices#destroy
            merchant_items GET    /merchants/:merchant_id/items(.:format)                                                  items#index
                           POST   /merchants/:merchant_id/items(.:format)                                                  items#create
         new_merchant_item GET    /merchants/:merchant_id/items/new(.:format)                                              items#new
@@ -23,6 +29,8 @@
                           PATCH  /merchants/:merchant_id/items/:id(.:format)                                              items#update
                           PUT    /merchants/:merchant_id/items/:id(.:format)                                              items#update
                           DELETE /merchants/:merchant_id/items/:id(.:format)                                              items#destroy
+    merchant_items_status PATCH  /merchants/:merchant_id/items_status/:id(.:format)                                       merchant_items_status#update
+                          PUT    /merchants/:merchant_id/items_status/:id(.:format)                                       merchant_items_status#update
         merchant_invoices GET    /merchants/:merchant_id/invoices(.:format)                                               invoices#index
                           POST   /merchants/:merchant_id/invoices(.:format)                                               invoices#create
      new_merchant_invoice GET    /merchants/:merchant_id/invoices/new(.:format)                                           invoices#new
