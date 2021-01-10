@@ -1,27 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LittleEtsyShop</title>
+    <title>Esty</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/flatly/bulmaswatch.min.css">
   </head>
 
   <body>
-    <section id="flash-message">
-      <% flash.each do |type, messages| %>
-        <% if messages.respond_to?('each') %>
-          <% messages.each do |message| %>
-            <p><%= message %></p>
-          <% end %>
-        <% else %>
-          <p><%= messages %></p>
-        <% end %>
-      <% end %>
-    </section>
-    <%= yield %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/"><%= image_tag 'logo.png', alt: "Little Esty Shop", id: 'logo' %></a>
+          <%= link_to 'Shop', '/', class: 'navbar-item' %>
+          <%= link_to 'Navigate', '/', class: 'navbar-item' %>
+          <%= link_to 'Somethin', '/', class: 'navbar-item' %>
+        </div>
 
+        <div class="navbar-end"></div>
+          <%= link_to 'Sign up', '/', class: 'navbar-item' %>
+          <%= link_to 'Login', '/', class: 'navbar-item' %>
+        </div>
+      </div>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    </nav>
+    
+    <section class="section">
+      <div class="content">
+          
+        <% if !flash.empty? %>
+          <article class="message is-info" id="flash-message">
+            <div class="message-body">
+              <% flash.each do |type, messages| %>
+                <% if messages.respond_to?('each') %>
+                  <% messages.each do |message| %>
+                    <p><%= message %></p>
+                  <% end %>
+                <% else %>
+                  <p><%= messages %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
+    </section>
   </body>
 </html>
