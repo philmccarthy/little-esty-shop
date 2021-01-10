@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :controllers
   root to: "welcome#index"
   devise_for :users, :controllers => {:registrations => "users/registrations"}
-  resources :repos
+  devise_for :admins, controllers: {:sessions => "admins/sessions", :passwords => "admins/passwords", :registrations => "admins/registrations"}
   namespace :admin do
     resources :merchants, except: [:destoy]
     resources :merchants_status, only: [:update]

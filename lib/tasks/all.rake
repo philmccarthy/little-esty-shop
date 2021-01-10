@@ -27,7 +27,6 @@ namespace :load_csv do
     end
   end
 
-
   task :items => :environment do
     Item.destroy_all
     CSV.foreach('db/data/items.csv',:headers => true) do |row|

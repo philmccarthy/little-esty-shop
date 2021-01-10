@@ -9,3 +9,5 @@
 # @ely_hess = User.create(name: "ely.hess@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 1)
 
 FactoryBot.create(:user)
+
+@james = Admin.create!(user_name: "StrifeLee", email: "auron1731@yahoo.com", password: "password")

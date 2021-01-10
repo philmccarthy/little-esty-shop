@@ -1,6 +1,6 @@
 class Admin::MerchantsController < ApplicationController
   before_action :set_merchant, only:[:show, :edit, :update]
-  before_action :admin_only
+  before_action :authenticate_admin!
 
   def index
     @merchants_enabled = Merchant.enabled
@@ -10,7 +10,7 @@ class Admin::MerchantsController < ApplicationController
 
   def show
   end
-  
+
   def edit
   end
 
@@ -36,7 +36,7 @@ class Admin::MerchantsController < ApplicationController
     else
       flash[:error] = @merchant.errors.full_messages
       set_merchant
-      render :edit 
+      render :edit
     end
   end
 
