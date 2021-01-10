@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   match "/404", to: "errors#not_found", via: :all
-
+  root to: "welcome#index"
+  resources :welcome, only: [:index]
+  resources :cart
   resources :repos
   namespace :admin do
     resources :merchants, except: [:destroy]
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
     resources :invoice_items, only: [:update]
     resources :dashboard, only: [:index]
   end
+
 
   resources :admin, controller: 'admin/dashboard', only: [:index]
 end

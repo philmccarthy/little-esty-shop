@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :set_merchant
-  
+
   def index
   end
 
@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
 
   def edit
   end
-  
+
   def new
     @item = Item.new
   end
@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
     else
       flash[:error] = @item.errors.full_messages
       set_item
-      render :edit 
+      render :edit
     end
   end
 

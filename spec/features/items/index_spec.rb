@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'merchants items index page', type: :feature do
   describe 'as a merchant' do
-    
+
     before(:each) do
       @merchant = create(:merchant)
       @customer_1 = create(:customer)
@@ -124,13 +124,13 @@ RSpec.describe 'merchants items index page', type: :feature do
       2.times do
         create(:invoice_item, item: @merchant_2.items.third, invoice: @invoice_43, quantity: 10, unit_price: 6)
       end
-      
-      
+
+
       visit merchant_items_path(@merchant_2)
       within("#top-items") do
         expected = [@merchant_2.items.second, @merchant_2.items.third, @merchant_2.items.first, @merchant_2.items.fourth, @merchant_2.items.fifth]
         top_5 = @merchant_2.top_5_items
-        
+
         expect(page).to have_content("#{top_5[0].name} - $#{top_5[0].total_revenue.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}")
         expect(page).to have_content("Top day for #{top_5[0].name} was #{top_5[0].best_day}")
 
@@ -141,6 +141,11 @@ RSpec.describe 'merchants items index page', type: :feature do
         expect(page).to have_content("Top day for #{top_5[4].name} was #{top_5[4].best_day}")
 
         expect("#{top_5[0].name}").to appear_before("#{top_5[3].name}")
+      end
+
+      it 'can show all items index' do
+        visit items_path
+
       end
     end
   end
