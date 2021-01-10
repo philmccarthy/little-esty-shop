@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-@ely_hess = User.create(name: "ely.hess@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 1)
-@a_merchant = User.create(name: "merchant@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 0)
+# @ely_hess = User.create(name: "ely.hess@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 1)
 
-@merchant_1 = @ely_hess.merchant_create(name: "A merchant")
+FactoryBot.create(:user)
