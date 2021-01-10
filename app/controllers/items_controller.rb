@@ -16,8 +16,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    # @merchant.items.create(item_params)
-    # redirect_to merchant_items_path(params[:merchant_id])
     @item = @merchant.items.new(item_params)
     if @item.valid?
       @item.save
