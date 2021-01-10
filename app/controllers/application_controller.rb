@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :check_concurrent_session
 
+  def correct_user?
+    @merchant = Merchant.find(params[:merchant_id])
+    render file: "/public/404" unless current_admin || @merchant.user_id == current_user.id
+  end
+
   def check_concurrent_session
     if admin_already_logged_in?
       flash[:notice] = "already signed in"

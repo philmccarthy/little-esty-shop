@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :set_merchant
   before_action :correct_user?
-  
+
   def index
   end
 
@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   def edit
   end
-  
+
   def new
     @item = Item.new
   end
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     else
       flash[:error] = @item.errors.full_messages
       set_item
-      render :edit 
+      render :edit
     end
   end
 
@@ -44,10 +44,5 @@ class ItemsController < ApplicationController
 
   def set_merchant
     @merchant = Merchant.find(params[:merchant_id])
-  end
-
-  def correct_user?
-    @merchant = Merchant.find(params[:merchant_id])
-    render file: "/public/404" unless @merchant.user_id == current_user.id || current_user.admin?
   end
 end

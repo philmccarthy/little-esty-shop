@@ -1,5 +1,7 @@
 class InvoiceItemsController < ApplicationController
   before_action :set_item, only: [:update]
+  before_action :correct_user?
+
 
   def update
       @invoice_item.update!(item_params)
