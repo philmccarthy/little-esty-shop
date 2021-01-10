@@ -1,5 +1,6 @@
 class Admin::MerchantsController < ApplicationController
   before_action :set_merchant, only:[:show, :edit, :update]
+  before_action :admin_only
 
   def index
     @merchants_enabled = Merchant.enabled
@@ -40,6 +41,10 @@ class Admin::MerchantsController < ApplicationController
   end
 
   private
+
+  def admin_only
+    render file: "/public/404" unless current_user.admin?
+  end
 
   def set_merchant
     @merchant = Merchant.find(params[:id])
