@@ -15,6 +15,7 @@
     <% elsif user_signed_in? && current_user.merchant? %>
       <li><%= link_to 'Merchant Dashboard', merchant_dashboard_index_path(current_user.merchant) %></li>
     <% end %>
+    
 
     <% if user_signed_in? %>
       <li><%= link_to current_user.email, edit_user_registration_path %></li>
