@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :repos
   namespace :admin do
     resources :merchants, except: [:destoy]
