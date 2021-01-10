@@ -10,4 +10,4 @@
 
 FactoryBot.create(:user)
 
-@james = Admin.create!(user_name: "StrifeLee", email: "auron1731@yahoo.com", password: "password")
+@admin = Admin.create!(user_name: "Admin", email: "admin@gmail.com", password: "admin")
