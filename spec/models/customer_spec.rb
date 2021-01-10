@@ -20,14 +20,17 @@ RSpec.describe Customer, type: :model do
 
   describe 'instance methods' do
     before :each do
-      @merchant = create(:merchant)
-
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
+      
       @customer_1 = create(:customer)
       @customer_2 = create(:customer)
       @customer_3 = create(:customer)
       @customer_4 = create(:customer)
       @customer_5 = create(:customer)
       @customer_6 = create(:customer)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       
       Customer.all.each do |customer|
         create_list(:invoice, 1, customer: customer, merchant: @merchant)
@@ -52,7 +55,8 @@ RSpec.describe Customer, type: :model do
 
   describe 'class methods' do
     before :each do
-      @merchant = create(:merchant)
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
 
       @customer_1 = create(:customer)
       @customer_2 = create(:customer)
