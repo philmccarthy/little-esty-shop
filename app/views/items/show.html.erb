@@ -1,11 +1,10 @@
-<ul class="navbar">
-  <li><%= link_to 'Edit Item', edit_merchant_item_path(@item.merchant_id, @item.id) %></li>
-</ul>
-<section>
-  <ul>
-    <li><h3>Item Show Page </h3></li>
-    <li><%= @item.name %>
-      <%= @item.unit_price %></li>
-    <li><%= @item.description %></li>
-  </ul>
+<%= render 'dashboard/merchant_nav' %>
+
+<h3 class="has-text-centered"><%= @item.name %></h3>
+
+<section class="section">
+  <p class="is-size-4">Description: <%= @item.description %></p>
+  <p class="is-size-4">Current Price: <%= number_to_currency(@item.unit_price, precision: 0) %></p>
 </section>
+
+<%= button_to 'Edit Item', edit_merchant_item_path(@item.merchant_id, @item.id), class: 'button block is-large is-fullwidth' %>
