@@ -142,11 +142,6 @@ RSpec.describe 'merchants items index page', type: :feature do
 
         expect("#{top_5[0].name}").to appear_before("#{top_5[3].name}")
       end
-
-      it 'can show all items index' do
-        visit items_path
-
-      end
     end
   end
 end

@@ -5,6 +5,10 @@ class WelcomeController < ApplicationController
   def index
   end
 
+  def show
+    
+  end
+
   private
 
   def set_items

@@ -12,6 +12,7 @@ RSpec.describe "When a user adds items to their cart" do
     within("#item-#{@item.id}") do
       click_button "Add Item"
     end
+
     within("#item-#{@item2.id}") do
       click_button "Add Item"
     end

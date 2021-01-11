@@ -3,10 +3,11 @@ class CartController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    cart.add_item(item.id)
     session[:cart] = cart.contents
-    quantity = cart.count_of(item.id)
+    cart.add_item(item.id)
+    quantity = cart.count_of(item)
     flash[:notice] = "You now have #{pluralize(quantity, "copy")} of #{item.name} in your cart."
+    binding.pry
     redirect_to "/"
   end
 end

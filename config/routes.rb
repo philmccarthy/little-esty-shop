@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   match "/404", to: "errors#not_found", via: :all
   root to: "welcome#index"
-  resources :welcome, only: [:index]
+  resources :welcome, only: [:index, :show]
   resources :cart
   resources :repos
   namespace :admin do
