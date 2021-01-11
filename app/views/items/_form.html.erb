@@ -1,6 +1,6 @@
 
 <section class="section">
-<%= form_with model: @item, method: method, url: path do |form| %>
+<%= form_with model: @item, method: method, url: path, local: true do |form| %>
 
   <%= form.label 'name:', class: 'label is-large' %>
     <%= form.text_field :name, class: 'input is-large' %></br></br>
