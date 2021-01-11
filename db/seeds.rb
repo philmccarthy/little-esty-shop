@@ -8,6 +8,4 @@
 
 # @ely_hess = User.create(name: "ely.hess@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 1)
 
-FactoryBot.create(:user)
-
-@admin = Admin.create!(user_name: "Admin", email: "admin@gmail.com", password: "admin")
+Admin.create!(email: "ely.hess@gmail.com", password: "password", password_confirmation: "password")
