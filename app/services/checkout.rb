@@ -1,4 +1,4 @@
-class checkout
+class Checkout
 
   def initialize(content)
     @content = content

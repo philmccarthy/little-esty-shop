@@ -9,11 +9,11 @@ class Cart
     @contents.values.sum
   end
 
-  def add_item(item)
-    @contents[item] = count_of(item) + 1
+  def add_item(id)
+    @contents[id.to_s] = count_of(id) + 1
   end
 
-  def count_of(item)
-    @contents[item].to_i
+  def count_of(id)
+    @contents[id.to_s].to_i
   end
 end
