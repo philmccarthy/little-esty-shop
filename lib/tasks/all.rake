@@ -4,10 +4,13 @@ namespace :load_csv do
   desc "create all"
 
   task :customers => :environment do
+    i = 2
     CSV.foreach('db/data/customers.csv',:headers => true) do |row|
     Customer.create!({id: row[0],
                       first_name: row[1],
                       last_name: row[2],
+                      email: "example#{i += 1}@example.com",
+                      password: "password",
                       created_at: row[3],
                       updated_at: row[4]
                       })
