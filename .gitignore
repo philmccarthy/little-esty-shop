@@ -31,5 +31,5 @@
 config/application.yml
 
 coverage
-.idea
+echo '.idea'
 
