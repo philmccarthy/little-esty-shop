@@ -14,7 +14,7 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     it '#date' do
-      @user = create(:user, role: 1)
+      @user = create(:user)
       @merchant = create(:merchant, user: @user)
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
@@ -23,7 +23,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '#total_revenue' do
-      @user = create(:user, role: 1)
+      @user = create(:user)
       @merchant = create(:merchant, user: @user)
       @customer_1 = create(:customer)
       @item = create(:item, merchant: @merchant)
@@ -37,7 +37,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '#customer_name' do
-      @user = create(:user, role: 1)
+      @user = create(:user)
+      login_as(@user, scope: :user)
       @merchant = create(:merchant, user: @user)
       @bob = create(:customer, first_name: "Cob", last_name: "Cornwall")
       @invoice_1 = create(:invoice, customer: @bob, merchant: @merchant)
@@ -47,7 +48,8 @@ RSpec.describe Invoice, type: :model do
 
   describe 'class methods' do
     it '::incomplete_invoices' do
-      @user = create(:user, role: 1)
+      @user = create(:user)
+      login_as(@user, scope: :user)
       @merchant = create(:merchant, user: @user)
       @customer_1 = create(:customer)
 

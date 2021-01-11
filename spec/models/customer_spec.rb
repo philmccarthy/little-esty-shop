@@ -20,7 +20,7 @@ RSpec.describe Customer, type: :model do
 
   describe 'instance methods' do
     before :each do
-      @user = create(:user, role: 1)
+      @user = create(:user)
       @merchant = create(:merchant, user: @user)
       
       @customer_1 = create(:customer)
@@ -55,7 +55,7 @@ RSpec.describe Customer, type: :model do
 
   describe 'class methods' do
     before :each do
-      @user = create(:user, role: 1)
+      @user = create(:user)
       @merchant = create(:merchant, user: @user)
 
       @customer_1 = create(:customer)

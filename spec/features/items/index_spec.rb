@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'merchants items index page', type: :feature do
   describe 'as a merchant' do
     before(:each) do
-      @user = create(:user, role: 1)
+      @user = create(:user)
+      login_as(@user, scope: :user)
       @merchant = create(:merchant, user: @user)
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, merchant: @merchant, customer: @customer_1)
@@ -103,7 +104,8 @@ RSpec.describe 'merchants items index page', type: :feature do
     end
 
     it 'has a top items section that displays top 5 items and total_revenue for each and historical best day for sales', :skip_before do
-      @user = create(:user, role: 1)
+      @user = create(:user)
+      login_as(@user, scope: :user)
       @merchant_2 = create(:merchant, user: @user)
       @customer_23 = create(:customer)
       @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)

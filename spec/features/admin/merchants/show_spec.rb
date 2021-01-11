@@ -2,13 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Show' do
   before :each do
-    @user = create(:user, role: 1)
-    @user1 = create(:user, role: 0)
-    @user2 = create(:user, role: 0)
+    @user1 = create(:user)
+    @user2 = create(:user)
     @merchant_1 = create(:merchant, user: @user1)
     @merchant_2 = create(:merchant, user: @user2)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+    @admin = create(:admin)
+    login_as(@admin, scope: :admin)
   end
+
   describe 'Admin Merchant Show Page' do
     it 'can show a Merchant name' do
       visit admin_merchant_path(@merchant_1)
