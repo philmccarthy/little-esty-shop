@@ -31,4 +31,5 @@
 config/application.yml
 
 coverage
+.idea
 
