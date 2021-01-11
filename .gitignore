@@ -31,5 +31,7 @@
 config/application.yml
 
 coverage
-echo '.idea'
+
+#idea folder
+.idea/
 
