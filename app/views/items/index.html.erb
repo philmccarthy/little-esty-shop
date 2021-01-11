@@ -1,42 +1,49 @@
-<h2><%= @merchant.name %></h3>
 
-<hr>
-<h3 style="text-align:center">My Items</h3>
+<%= render 'dashboard/merchant_nav' %>
 
-<%= link_to 'New Item', new_merchant_item_path(@merchant) %>
+<h3 class="has-text-centered">My Items</h3>
 
-<section id="items-enabled">
-  <h3>Enabled Items</h3>
-  <ul>
-  <% @merchant.items.enabled.each do |item| %>
-    <li>
-      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
-      <%= button_to 'Disable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "disabled"}}), method: :patch %>
-    </li>
-  <% end %>
-  </ul>
-</section>
+<%= link_to 'Create New Item', new_merchant_item_path(@merchant), class: 'block button is-large' %>
 
-<section id="items-disabled">
-  <h3>Disabled Items</h3>
-  <ul>
-  <% @merchant.items.disabled.each do |item| %>
-    <li>
-      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
-      <%= button_to 'Enable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "enabled"}}), method: :patch, id: "btn-enable-#{item.id}" %>
-    </li>
-  <% end %>
-  </ul>
-</section>
+<section class="section">
+  <div class="tile is-ancestor">
+    <div class="tile is-6 is-vertical is-parent">
+      <div class="tile is-child box" id="items-enabled">
+        <p class="title">Enabled Items</p>
+        <% @merchant.items.enabled.each do |item| %>
+          <p>
+          <%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: 'is-size-5' %>
+          <%= link_to 'Disable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "disabled"}}), method: :patch, class: 'button is-pulled-right' %>
+          </p>
+        <% end %>
+        </p>
+      </div>
 
-<section id="top-items">
-  <h3>Top Items</h3>
-  <ol>
-    <% @merchant.top_5_items.each do |item| %>
-      <li>
-        <%= item.name %> - $<%= number_with_delimiter(item.total_revenue, delimiter: ',') %> in sales
-        <p><%= "Top day for #{item.name} was #{item.best_day}" %>
-      </li>
-    <% end %>
-  </ol>
+      <div class="tile is-child box" id="items-disabled">
+        <p class="title">Disabled Items</p>
+        <% @merchant.items.disabled.each do |item| %>
+          <p>
+            <%= link_to item.name, merchant_item_path(@merchant.id, item.id), class: 'is-size-5' %>
+            <%= link_to 'Enable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "enabled"}}), method: :patch, class: 'button block is-pulled-right', id: "btn-enable-#{item.id}" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="tile is-6 is-parent">
+      <div class="tile is-child box" id="top-items">
+        <p class="title">Top Items</p>
+        <ol class="content is-medium">
+          <% @merchant.top_5_items.each do |item| %>
+            <li class="block">
+              <div class="tile is-child">
+                <p class="is-size-4"><%= item.name %> - <%= number_to_currency(item.total_revenue, precision: 0) %> in sales
+                <p><%= "Top day for #{item.name} was #{item.best_day}" %></p>
+              </div>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
 </section>

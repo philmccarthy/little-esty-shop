@@ -71,18 +71,18 @@ RSpec.describe 'merchant dashboard index', type: :feature do
 
     it 'When I visit my merchant dashboard Then I see link to my merchant items index (/merchant/merchant_id/items) And I see a link to my merchant invoices index (/merchant/merchant_id/invoices)' do
       visit merchant_dashboard_index_path(@merchant)
-      expect(page).to have_link('Merchant Items', href: merchant_items_path(@merchant))
-      expect(page).to have_link('Merchant Invoices', href: merchant_invoices_path(@merchant))
+      expect(page).to have_link('My Items', href: merchant_items_path(@merchant))
+      expect(page).to have_link('My Invoices', href: merchant_invoices_path(@merchant))
     end
 
     it 'can show top 5 customers of the merchant' do
       visit merchant_dashboard_index_path(@merchant)
 
-      expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name} - Successful Transactions: #{@merchant.top_5[0].total_success}")
-      expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name} - Successful Transactions: #{@merchant.top_5[1].total_success}")
-      expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name} - Successful Transactions: #{@merchant.top_5[2].total_success}")
-      expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} - Successful Transactions: #{@merchant.top_5[3].total_success}")
-      expect(page).to have_content("#{@customer_6.first_name} #{@customer_6.last_name} - Successful Transactions: #{@merchant.top_5[4].total_success}")
+      expect(page).to have_content("#{@customer_4.first_name} #{@customer_4.last_name} - #{@merchant.top_5[0].total_success} purchases")
+      expect(page).to have_content("#{@customer_2.first_name} #{@customer_2.last_name} - #{@merchant.top_5[1].total_success} purchases")
+      expect(page).to have_content("#{@customer_5.first_name} #{@customer_5.last_name} - #{@merchant.top_5[2].total_success} purchases")
+      expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} - #{@merchant.top_5[3].total_success} purchases")
+      expect(page).to have_content("#{@customer_6.first_name} #{@customer_6.last_name} - #{@merchant.top_5[4].total_success} purchase")
 
       expect(@customer_4.name).to appear_before(@customer_2.name)
       expect(@customer_1.name).to appear_before(@customer_6.name)
