@@ -1,1 +1,18 @@
 <h1>Little Esty Shop</h1>
+<section class="navbar">
+  <%= link_to "cart", welcome_path(cart) %>
+  <p>Cart: <%= cart.total_count %></p>
+</section>
+
+<h1> All Items </h1>
+
+<% @items.each do |item| %>
+  <ul>
+    <section id="item-<%= item.id %>">
+      <li>
+        <%= link_to item.name, merchant_item_path(item.merchant_id, item.id) %>
+        <%= button_to "Add Item", "/cart/#{item.id}", method: :patch %>
+      </li>
+    </section>
+  </ul>
+<% end %>

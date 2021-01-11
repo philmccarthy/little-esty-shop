@@ -99,7 +99,7 @@ RSpec.describe 'merchants can update items', type: :feature do
 
       click_button("Update Item")
       expect(current_path).to eq(merchant_item_path(@merchant.id, item.id))
-      expect(page).to have_content("[\"Unit price is not a number\"]")
+      expect(page).to have_content("Unit price is not a number")
     end
   end
 end

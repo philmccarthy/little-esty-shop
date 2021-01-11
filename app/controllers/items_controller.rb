@@ -17,13 +17,20 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @merchant.items.create(item_params)
-    redirect_to merchant_items_path(params[:merchant_id])
+    @item = @merchant.items.new(item_params)
+    if @item.valid?
+      @item.save
+      flash.notice = "Item #{@item.name} was created successfully!"
+      redirect_to merchant_items_path(params[:merchant_id])
+    else
+      flash[:error] = @item.errors.full_messages
+      render :new
+    end
   end
 
   def update
     if @item.update(item_params)
-      flash[:notice] = "Item successfully updated"
+      flash.notice = "Item successfully updated"
       redirect_to merchant_item_path(@item.merchant_id, @item.id)
     else
       flash[:error] = @item.errors.full_messages

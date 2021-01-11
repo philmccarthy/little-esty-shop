@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :check_concurrent_session
+  helper_method :cart
+
+  def cart
+    cart ||= Cart.new(session[:cart])
+  end
 
   def correct_user?
     @merchant = Merchant.find(params[:merchant_id])
