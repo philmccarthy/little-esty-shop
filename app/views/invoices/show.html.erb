@@ -12,19 +12,7 @@
       Completed
     <% end %>
   </p>
-
-  <p>Created on: <%= @invoice.date %></p>
-
-  <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue, precision: 0) %></p>
-</section>
-
-<section class="section is-size-4">
-  <p class="title">Customer:</p>
-  <section class="section">
-    <p><%= @invoice.customer_name %></p>
-    <p>123 Drury Ln
-    <p>Nowhere, ID 10001
-  </section>
+  <%= render 'invoice_status' %>
 </section>
 
 <section class="section">
