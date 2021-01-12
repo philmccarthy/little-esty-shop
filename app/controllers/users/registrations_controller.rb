@@ -13,8 +13,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    @user.save
-    @user.create_merchant(name: params[:user][:merchant])
+    if @user.save
+      @user.create_merchant(name: params[:user][:merchant])
+      flash.notice = "Merchant #{@user.merchant.name} was created successfully!"
+    end
   end
 
   # GET /resource/edit
@@ -54,9 +56,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    if resource.admin?
+      require "pry"; binding.pry
+      admin_merchant_path
+    else
+      root_path
+    end
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

@@ -8,22 +8,25 @@ RSpec.describe 'Admin Merchants Show' do
       login_as(@admin, scope: :admin)
     end
 
-    xit 'can fill in the new form' do
+    it 'can create a new merchant' do
       visit new_admin_merchant_path
-      fill_in 'Name', with: 'Test'
-      click_on 'Create Merchant'
+      fill_in 'user[email]', with: 'test@gmail.com'
+      fill_in 'user[password]', with: 'testpass'
+      fill_in 'user[password_confirmation]', with: 'testpass'
+      fill_in 'user[merchant]', with: 'merchant name'
+      click_on 'Create'
 
-      expect(current_path).to eq(admin_merchants_path(@merchant_1))
-      expect(page).to have_content('Test')
+      expect(page).to have_content("You have signed up successfully.")
     end
 
-    xit 'displays flash message if validations fail' do
+    it 'displays flash message if validations fail' do
       visit new_admin_merchant_path
-      fill_in 'Name', with: ''
-      click_on 'Create Merchant'
+      fill_in 'user[email]', with: 'test@gmail.com'
+      fill_in 'user[password]', with: 'testpass'
+      fill_in 'user[password_confirmation]', with: 'testpass'
+      click_on 'Create'
 
-      expect(current_path).to eq(admin_merchants_path(@merchant_1))
-      expect(page).to have_content("Merchant was not created successfully!")
+      expect(page).to have_content("Error")
     end
   end
 end
