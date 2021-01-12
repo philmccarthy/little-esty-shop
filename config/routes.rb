@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
-  resources :customers, only: [:show]
   devise_for :customers, controllers: {:sessions => "customers/sessions", :passwords => "customers/passwords", :registrations => "customers/registrations"}
+  resources :customers, only: [:show]
   resources :welcome, only: [:index, :show]
   resources :cart, only: [:show, :update, :destroy]
   devise_for :users, :controllers => {:registrations => "users/registrations"}

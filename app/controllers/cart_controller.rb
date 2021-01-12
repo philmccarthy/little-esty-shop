@@ -3,7 +3,6 @@ class CartController < ApplicationController
 
   def show
     @item_list = Item.where(id: cart.contents.keys)
-    @customer = current_customer
   end
 
   def update

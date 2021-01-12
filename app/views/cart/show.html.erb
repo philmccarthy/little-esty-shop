@@ -1,9 +1,11 @@
-<h2><%= @customer.name %>'s Cart </h2>
 <h2> items in cart</h2>
 <% @item_list.each do |item| %>
   <%= item.name %>
   <%= cart.count_of(item.id) %>
   <%= link_to 'Remove Item', "/cart/#{item.id}", method: :delete %>
 <% end %>
-
-<%= link_to 'Create Order', orders_path, method: :post %>
+<% if customer_signed_in? %>
+  <%= link_to 'Create Order', orders_path, method: :post %>
+<% else %>
+  <%= link_to 'Sign in to Create Order', new_customer_session_path %>
+<% end %>
