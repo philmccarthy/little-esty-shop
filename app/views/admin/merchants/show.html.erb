@@ -1,3 +1,5 @@
-<h1><%= @merchant.name %></h1>
+<%= render 'admin/dashboard/admin_nav' %>
 
-<%= link_to "Edit Merchant's Info", edit_admin_merchant_path(@merchant) %>
+<h3 class="has-text-centered">Merchant: <%= @merchant.name %></h3>
+
+<%= link_to "Edit Merchant's Info", edit_admin_merchant_path(@merchant), class: 'button block is-large is-fullwidth is-primary' %>
