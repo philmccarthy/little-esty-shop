@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :admin do
-    email { 'admin@gmail.com' }
+    email { "admin@password.com" }
     password { "strongpassword" }
     password_confirmation { "strongpassword" }
   end

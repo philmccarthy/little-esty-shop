@@ -14,7 +14,8 @@ RSpec.describe 'Admin Merchants Show' do
       fill_in 'merchant[password]', with: 'testpass'
       fill_in 'merchant[password_confirmation]', with: 'testpass'
       fill_in 'merchant[name]', with: 'merchant name'
-      click_on 'Create'
+
+      click_button 'Sign up'
 
       expect(page).to have_content("You have signed up successfully.")
     end
@@ -24,9 +25,9 @@ RSpec.describe 'Admin Merchants Show' do
       fill_in 'merchant[email]', with: 'test@gmail.com'
       fill_in 'merchant[password]', with: 'testpass'
       fill_in 'merchant[password_confirmation]', with: 'testpass'
-      click_on 'Create'
+      click_button 'Sign up'
 
-      expect(page).to have_content("Error")
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end

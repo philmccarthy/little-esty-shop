@@ -2,7 +2,7 @@
 
 class Merchants::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
-  skip_before_action
+  after_action :check_concurrent_session, only: [:create]
 
   # GET /resource/sign_in
   def new
@@ -18,7 +18,7 @@ class Merchants::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     super
-    session.delete(:token)
+    session.delete(:merchant)
   end
 
   protected
@@ -30,7 +30,7 @@ class Merchants::SessionsController < Devise::SessionsController
 
   def set_login_token
     token = Devise.friendly_token
-    session[:token] = token
+    session[:merchant] = token
     current_merchant.login_token = token
     current_merchant.save
   end

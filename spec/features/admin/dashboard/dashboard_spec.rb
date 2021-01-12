@@ -20,8 +20,8 @@ describe 'As an Admin' do
       customer_list.size.times do |i|
         create_list(:transaction, (i+1), invoice: customer_list[i].invoices.first, result: 1)
       end
-
       @admin = create(:admin)
+
       login_as(@admin, scope: :admin)
     end
 

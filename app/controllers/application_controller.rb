@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :check_concurrent_session
 
   def check_concurrent_session
     if admin_signed_in?

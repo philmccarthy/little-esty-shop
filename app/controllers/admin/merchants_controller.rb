@@ -18,17 +18,6 @@ class Admin::MerchantsController < ApplicationController
     redirect_to new_merchant_registration_path
   end
 
-  def create
-    @merchant = Merchant.new(merchant_params)
-    if @merchant.save
-      flash.notice = "Merchant #{@merchant.name} was created successfully!"
-      redirect_to admin_merchants_path
-    else
-      flash[:error] = "Merchant was not created successfully!"
-      render :new
-    end
-  end
-
   def update
     if @merchant.update(merchant_params)
       flash.notice = "Merchant #{@merchant.name} was updated successfully!"
@@ -41,10 +30,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   private
-
-  def admin_only
-    render file: "/public/404" unless current_user.admin?
-  end
 
   def set_merchant
     @merchant = Merchant.find(params[:id])

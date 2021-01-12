@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  
+
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :description }
@@ -16,8 +16,7 @@ RSpec.describe Item, type: :model do
 
   describe 'instance methods' do
     it '#best day' do
-      @user = create(:user)
-      @merchant_2 = create(:merchant, user: @user)
+      @merchant_2 = create(:merchant)
       @customer_23 = create(:customer)
       @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
       @invoice_43 = create(:invoice, merchant: @merchant_2, customer: @customer_23)

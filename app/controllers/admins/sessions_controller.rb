@@ -2,7 +2,6 @@
 
 class Admins::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
-  skip_before_action :check_concurrent_session
 
   # GET /resource/sign_in
   def new
@@ -17,7 +16,6 @@ class Admins::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    binding.pry
     session.delete(:token)
     super
   end
