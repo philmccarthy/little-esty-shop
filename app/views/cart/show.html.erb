@@ -3,7 +3,7 @@
 <% @item_list.each do |item| %>
   <%= item.name %>
   <%= cart.count_of(item.id) %>
-  <%= link_to 'Remove one', "/cart/#{item.id}", method: :delete %>
+  <%= link_to 'Remove Item', "/cart/#{item.id}", method: :delete %>
 <% end %>
 
 <%= link_to 'Create Order', orders_path, method: :post %>

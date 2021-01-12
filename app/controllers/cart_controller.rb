@@ -19,8 +19,7 @@ class CartController < ApplicationController
     item = Item.find(params[:id])
     session[:cart] = cart.contents
     cart.remove_item(item.id)
-    quantity = cart.count_of(item.id)
-    flash[:notice] = "You now have #{pluralize(quantity, "copy")} of #{item.name} in your cart."
+    flash[:notice] = "#{item.name} has been removed from your cart."
     redirect_to cart_path(cart)
   end
 
