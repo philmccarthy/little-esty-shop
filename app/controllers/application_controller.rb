@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :check_concurrent_session
   helper_method :cart
+  helper_method :order
+
+  def order
+    order ||= Order.new(session[:cart], current_customer)
+  end
 
   def cart
     cart ||= Cart.new(session[:cart])

@@ -2,3 +2,5 @@
 <% @item_list.each do |item| %>
   <%= item.name %>
 <% end %>
+
+<%= link_to 'Create Order', orders_path, method: :post %>

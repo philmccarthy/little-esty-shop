@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
   devise_for :customers
   resources :welcome, only: [:index, :show]
-  resources :cart
+  resources :cart, only: [:show, :update]
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   devise_for :admins, controllers: {:sessions => "admins/sessions", :passwords => "admins/passwords", :registrations => "admins/registrations"}
   namespace :admin do
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :merchants_status, only: [:update]
     resources :invoices, only: [:index, :show, :update]
   end
-
+  resources :orders, only: [:create, :show]
   resources :merchants do
     resources :items
     resources :items_status, controller: "merchant_items_status", only: [:update]

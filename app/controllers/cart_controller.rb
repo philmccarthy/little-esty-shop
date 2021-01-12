@@ -1,8 +1,10 @@
 class CartController < ApplicationController
   include ActionView::Helpers::TextHelper
+  before_action :order
 
   def show
     @item_list = Item.where(id: cart.contents.keys)
+    @customer = current_customer
   end
 
   def update
