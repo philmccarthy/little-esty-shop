@@ -1,4 +1,3 @@
-
 <%= render 'dashboard/merchant_nav' %>
 
 <h3 class="has-text-centered">My Items</h3>
@@ -31,7 +30,7 @@
     </div>
 
     <div class="tile is-6 is-parent">
-      <div class="tile is-child box" id="top-items">
+      <div class="tile is-child" id="top-items">
         <p class="title">Top Items</p>
         <ol class="content is-medium">
           <% @merchant.top_5_items.each do |item| %>
