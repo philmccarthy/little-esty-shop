@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :customers, only: [:show]
   devise_for :customers, controllers: {:sessions => "customers/sessions", :passwords => "customers/passwords", :registrations => "customers/registrations"}
   resources :welcome, only: [:index, :show]
-  resources :cart, only: [:show, :update]
+  resources :cart, only: [:show, :update, :destroy]
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   devise_for :admins, controllers: {:sessions => "admins/sessions", :passwords => "admins/passwords", :registrations => "admins/registrations"}
   namespace :admin do
