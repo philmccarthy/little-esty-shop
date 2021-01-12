@@ -1,0 +1,8 @@
+<% @customer.invoices.each do |invoice| %>
+  <%= invoice.id %><br>
+  <% invoice.invoice_items.each do |invitem| %>
+    <%= invitem.item.name %>
+    <%= invitem.quantity %>
+    <%= invitem.unit_price %>
+  <% end %>
+<% end %>

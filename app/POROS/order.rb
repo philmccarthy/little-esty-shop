@@ -3,7 +3,6 @@ class Order
               :invoice_items
 
   def initialize(data, customer)
-    @data = data
     @customer = customer
     @invoices = []
     @invoice_items = []
