@@ -3,15 +3,14 @@ require 'rails_helper'
 describe 'As an Admin' do
   describe 'When i visit the admin dashboard' do
     before :each do
-      @user = create(:user)
-      @merchant = create(:merchant, user: @user)
+      @merchant = create(:merchant)
       @customer_1 = create(:customer)
       @customer_2 = create(:customer)
       @customer_3 = create(:customer)
       @customer_4 = create(:customer)
       @customer_5 = create(:customer)
       @customer_6 = create(:customer)
-      
+
       Customer.all.each do |customer|
         create_list(:invoice, 1, customer: customer, merchant: @merchant)
       end
@@ -37,7 +36,7 @@ describe 'As an Admin' do
     it 'I can see the top customers' do
       visit admin_index_path
 
-      
+
       within('#top-customers') do
         expect(page).to have_content("Top 5 Customers")
         expect(all('.customer')[0].text).to eq("#{@customer_6.name} - #{@customer_6.successful_purchases} Purchases")
@@ -66,12 +65,12 @@ describe 'As an Admin' do
 
       within("#incomplete-invoices") do
         expect(page).to have_content("Incomplete Invoices")
-        
-        expect(all('.invoice')[0].text).to eq("#{@invoice_1.id} - #{@invoice_1.date}") 
-        expect(all('.invoice')[1].text).to eq("#{@invoice_2.id} - #{@invoice_2.date}")  
-        expect(all('.invoice')[2].text).to eq("#{@invoice_3.id} - #{@invoice_3.date}")   
-        expect(all('.invoice')[3].text).to eq("#{@invoice_4.id} - #{@invoice_4.date}")  
-        
+
+        expect(all('.invoice')[0].text).to eq("#{@invoice_1.id} - #{@invoice_1.date}")
+        expect(all('.invoice')[1].text).to eq("#{@invoice_2.id} - #{@invoice_2.date}")
+        expect(all('.invoice')[2].text).to eq("#{@invoice_3.id} - #{@invoice_3.date}")
+        expect(all('.invoice')[3].text).to eq("#{@invoice_4.id} - #{@invoice_4.date}")
+
         expect(page).to have_link("#{@invoice_1.id} - #{@invoice_1.date}")
         expect(page).to have_link("#{@invoice_2.id} - #{@invoice_2.date}")
         expect(page).to have_link("#{@invoice_3.id} - #{@invoice_3.date}")

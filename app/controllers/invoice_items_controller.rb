@@ -1,6 +1,6 @@
 class InvoiceItemsController < ApplicationController
   before_action :set_item, only: [:update]
-  before_action :correct_user?
+  before_action :signed_in
 
 
   def update

@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Show' do
   before :each do
-    @user1 = create(:user)
-    @user2 = create(:user)
-    @merchant_1 = create(:merchant, user: @user1)
-    @merchant_2 = create(:merchant, user: @user2)
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
 
     @admin = create(:admin)
     login_as(@admin, scope: :admin)
@@ -19,8 +17,9 @@ RSpec.describe 'Admin Merchants Show' do
     end
     it 'can have an update link to change merchant information' do
       visit admin_merchant_path(@merchant_1)
+      save_and_open_page
       click_on "Edit Merchant's Info"
-      
+
       expect(current_path).to eq(edit_admin_merchant_path(@merchant_1))
     end
   end

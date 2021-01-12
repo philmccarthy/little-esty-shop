@@ -16,13 +16,14 @@ namespace :load_csv do
 
   task :merchants => :environment do
     Merchant.destroy_all
+    i = 1
     CSV.foreach('db/data/merchants.csv',:headers => true) do |row|
-      x = FactoryBot.create(:user)
       Merchant.create!({id: row[0],
                        name: row[1],
                        created_at: row[2],
                        updated_at: row[3],
-                       user_id: x.id
+                       email: "merchant#{i += 1}@example.com",
+                       password: "password"
                        })
     end
   end

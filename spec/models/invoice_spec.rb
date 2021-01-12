@@ -14,8 +14,8 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     it '#date' do
-      @user = create(:user)
-      @merchant = create(:merchant, user: @user)
+      @merchant = create(:merchant)
+      login_as(@merchant, scope: :merchant)
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
 
@@ -23,8 +23,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '#total_revenue' do
-      @user = create(:user)
-      @merchant = create(:merchant, user: @user)
+      @merchant = create(:merchant)
       @customer_1 = create(:customer)
       @item = create(:item, merchant: @merchant)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
@@ -37,9 +36,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '#customer_name' do
-      @user = create(:user)
-      login_as(@user, scope: :user)
-      @merchant = create(:merchant, user: @user)
+      @merchant = create(:merchant)
+      login_as(@merchant, scope: :merchant)
       @bob = create(:customer, first_name: "Cob", last_name: "Cornwall")
       @invoice_1 = create(:invoice, customer: @bob, merchant: @merchant)
       expect(@invoice_1.customer_name).to eq("Cob Cornwall")
@@ -48,9 +46,8 @@ RSpec.describe Invoice, type: :model do
 
   describe 'class methods' do
     it '::incomplete_invoices' do
-      @user = create(:user)
-      login_as(@user, scope: :user)
-      @merchant = create(:merchant, user: @user)
+      @merchant = create(:merchant)
+      login_as(@merchant, scope: :merchant)
       @customer_1 = create(:customer)
 
       @item_1 = create(:item, merchant: @merchant)

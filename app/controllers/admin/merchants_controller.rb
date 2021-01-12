@@ -15,7 +15,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def new
-    @merchant = Merchant.new
+    redirect_to new_merchant_registration_path
   end
 
   def create

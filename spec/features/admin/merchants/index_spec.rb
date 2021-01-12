@@ -2,21 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index' do
   before :each do
-    @user1 = create(:user)
-    @user2 = create(:user)
-    @user3 = create(:user)
-    @user4 = create(:user)
-    @user5 = create(:user)
-    @user6 = create(:user)
-    @user7 = create(:user)
-
-    @merchant_1 = create(:merchant, status: 1, user: @user7)
-    @merchant_2 = create(:merchant, user: @user1)
-    @merchant_3 = create(:merchant, user: @user2)
-    @merchant_4 = create(:merchant, user: @user3)
-    @merchant_5 = create(:merchant, user: @user4)
-    @merchant_6 = create(:merchant, user: @user5)
-    @merchant_7 = create(:merchant, user: @user6)
+    @merchant_1 = create(:merchant, status: 1)
+    @merchant_2 = create(:merchant)
+    @merchant_3 = create(:merchant)
+    @merchant_4 = create(:merchant)
+    @merchant_5 = create(:merchant)
+    @merchant_6 = create(:merchant)
+    @merchant_7 = create(:merchant)
 
     @admin = create(:admin)
     login_as(@admin, scope: :admin)
@@ -54,7 +46,7 @@ RSpec.describe 'Admin Merchants Index' do
       within('#merchants-disabled') do
         expect(page).to have_content("Disabled Merchants")
         expect(page).to have_content(@merchant_1.name)
-        
+
         first(".merchant-#{@merchant_2.id}").click_on('Enable')
         expect(page).not_to have_content(@merchant_2.name)
       end
@@ -64,7 +56,7 @@ RSpec.describe 'Admin Merchants Index' do
     end
     it 'can display top 5 merchants by revenue' do
       customer1 = create(:customer)
-  
+
       invoice1 = create(:invoice, customer: customer1, merchant: @merchant_1)
       invoice2 = create(:invoice, customer: customer1, merchant: @merchant_2)
       invoice3 = create(:invoice, customer: customer1, merchant: @merchant_3)

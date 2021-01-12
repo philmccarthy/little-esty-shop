@@ -1,7 +1,7 @@
 class MerchantItemsStatusController < ApplicationController
+  before_action :signed_in
   before_action :set_item, only: [:update]
   before_action :set_merchant, only: [:update]
-  before_action :correct_user?
 
   def update
     @item.update!(item_params)

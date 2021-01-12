@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :signed_in
   before_action :set_item, except: [:index, :new, :create]
   before_action :set_merchant
-  before_action :correct_user?
 
   def index
   end

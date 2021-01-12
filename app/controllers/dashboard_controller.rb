@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :correct_user?
+  before_action :signed_in
 
   def index
     @merchant = Merchant.find(params[:merchant_id])

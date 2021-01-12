@@ -17,6 +17,8 @@ class Admins::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
+    binding.pry
+    session.delete(:token)
     super
   end
 

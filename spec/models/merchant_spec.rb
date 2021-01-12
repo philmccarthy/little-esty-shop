@@ -8,7 +8,6 @@ RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many :items }
     it { should have_many :invoices }
-    it { should belong_to :user}
     it { should have_many(:invoice_items).through(:invoices) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
@@ -16,14 +15,10 @@ RSpec.describe Merchant, type: :model do
 
   describe 'class methods' do
     before :each do
-      @user1 = create(:user)
-      @user2 = create(:user)
-      @user3 = create(:user)
-      @user4 = create(:user)
-      @merchant = create(:merchant, user: @user1)
-      @merchant1 = create(:merchant, status: 0, user: @user2)
-      @merchant2 = create(:merchant, status: 0, user: @user3)
-      @merchant3 = create(:merchant, status: 1, user: @user4)
+      @merchant = create(:merchant)
+      @merchant1 = create(:merchant, status: 0)
+      @merchant2 = create(:merchant, status: 0)
+      @merchant3 = create(:merchant, status: 1)
     end
     it '::enabled' do
       expect(Merchant.enabled).to eq([@merchant3])
@@ -32,17 +27,13 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])
     end
     it '::top_5_revenue' do
-      @user5 = create(:user)
-      @user6 = create(:user)
-      @user7 = create(:user)
-      @user8 = create(:user)
-      merchant4 = create(:merchant, name: '4', user: @user5)
-      merchant5 = create(:merchant, name: '5', user: @user6)
-      merchant6 = create(:merchant, name: '6', user: @user7)
-      merchant7 = create(:merchant, name: '7', user: @user8)
-  
+      merchant4 = create(:merchant, name: '4')
+      merchant5 = create(:merchant, name: '5')
+      merchant6 = create(:merchant, name: '6')
+      merchant7 = create(:merchant, name: '7')
+
       customer1 = create(:customer)
-  
+
       invoice1 = create(:invoice, customer: customer1, merchant: @merchant1)
       invoice2 = create(:invoice, customer: customer1, merchant: @merchant2)
       invoice3 = create(:invoice, customer: customer1, merchant: @merchant3)
@@ -75,7 +66,7 @@ RSpec.describe Merchant, type: :model do
       invoice_item6 = create(:invoice_item, item: item6, invoice: invoice6, quantity: 4, unit_price: 30) # 120 rev
       invoice_item7 = create(:invoice_item, item: item7, invoice: invoice7, quantity: 10, unit_price: 5) # 50 rev
       invoice_item8 = create(:invoice_item, item: item7, invoice: invoice7, quantity: 1, unit_price: 110) # 110 rev
-      
+
       expect(Merchant.top_5_merchants).to eq([@merchant1, merchant4, merchant6, merchant5, @merchant3])
     end
   end
@@ -83,14 +74,13 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     describe 'environment for top 5 customers and ready-to-ship' do
       before :each do
-        @user9 = create(:user)
-        @merchant = create(:merchant, user: @user9)
+        @merchant = create(:merchant)
         @customer_1 = create(:customer)
         @invoice_1 = create(:invoice, merchant: @merchant, customer: @customer_1)
         @invoice_2 = create(:invoice, merchant: @merchant, customer: @customer_1)
         create(:transaction, result: 1, invoice: @invoice_1)
         create(:transaction, result: 1, invoice: @invoice_2)
-    
+
         @customer_2 = create(:customer)
         @invoice_3 = create(:invoice, merchant: @merchant, customer: @customer_2)
         @invoice_4 = create(:invoice, merchant: @merchant, customer: @customer_2)
@@ -98,14 +88,14 @@ RSpec.describe Merchant, type: :model do
         create(:transaction, result: 1, invoice: @invoice_3)
         create(:transaction, result: 1, invoice: @invoice_3)
         create(:transaction, result: 1, invoice: @invoice_4)
-    
+
         @customer_5 = create(:customer)
         @invoice_5 = create(:invoice, merchant: @merchant, customer: @customer_5)
         @invoice_6 = create(:invoice, merchant: @merchant, customer: @customer_5)
         create(:transaction, result: 1, invoice: @invoice_5)
         create(:transaction, result: 1, invoice: @invoice_5)
         create(:transaction, result: 1, invoice: @invoice_6)
-    
+
         @customer_4 = create(:customer)
         @invoice_7 = create(:invoice, merchant: @merchant, customer: @customer_4)
         create(:transaction, result: 1, invoice: @invoice_7)
@@ -113,26 +103,26 @@ RSpec.describe Merchant, type: :model do
         create(:transaction, result: 1, invoice: @invoice_7)
         create(:transaction, result: 1, invoice: @invoice_7)
         create(:transaction, result: 1, invoice: @invoice_7)
-    
+
         @customer_3 = create(:customer)
         @invoice_8 = create(:invoice, merchant: @merchant, customer: @customer_3)
         create(:transaction, result: 0, invoice: @invoice_7)
-    
+
         @customer_6 = create(:customer)
         @invoice_9 = create(:invoice, merchant: @merchant, customer: @customer_6)
         @invoice_10 = create(:invoice, merchant: @merchant, customer: @customer_6)
         create(:transaction, result: 1, invoice: @invoice_9)
-    
+
         create_list(:item, 3, merchant: @merchant)
-    
+
         5.times do
           create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
         end
-    
+
         5.times do
           create(:invoice_item, item: Item.second, invoice: Invoice.all.sample, status: 1)
         end
-    
+
         5.times do
           create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0)
         end
@@ -143,49 +133,47 @@ RSpec.describe Merchant, type: :model do
         actual = @merchant.top_5.map { | x | x[:first_name]}
         expect(actual).to eq(top)
       end
-  
+
       it '#ready_to_ship' do
         expected = @merchant.ready_to_ship
         expect(expected.length).to eq(10)
       end
 
       it '#best_day', :skip_before do
-        @user = create(:user)
-        @merchant = create(:merchant, user: @user)
+        @merchant = create(:merchant)
         @customer_1 = create(:customer)
         @item_1 = create(:item, merchant: @merchant)
-  
+
         @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
         @invoice_2 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 1, created_at: "2012-02-25 09:54:09")
         @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 2, created_at: "2012-03-25 09:54:09")
-        
+
         @transaction1 = create(:transaction, invoice: @invoice_1, result: 1)
         @transaction2 = create(:transaction, invoice: @invoice_2, result: 1)
         @transaction3 = create(:transaction, invoice: @invoice_3, result: 1)
-  
+
         @invoice_item_1 = create(:invoice_item, status: 0, item: @item_1, invoice: @invoice_1, unit_price: 300, quantity: 1)
         @invoice_item_2 = create(:invoice_item, status: 0, item: @item_1, invoice: @invoice_2, unit_price: 100, quantity: 1)
         @invoice_item_3 = create(:invoice_item, status: 0, item: @item_1, invoice: @invoice_3, unit_price: 200, quantity: 1)
-  
+
         expect(@merchant.best_day).to eq(@invoice_1.date)
       end
-  
+
       it '#top_5_items', :skip_before do
-        @user = create(:user)
-        @merchant_2 = create(:merchant, user: @user)
+        @merchant_2 = create(:merchant)
         @customer_23 = create(:customer)
         @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
         @invoice_43 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
         create(:transaction, result: 1, invoice: @invoice_33)
         create(:transaction, result: 0, invoice: @invoice_43)
-  
+
         create_list(:item, 6, merchant: @merchant_2)
-  
+
         create(:invoice_item, item: @merchant_2.items.fourth, invoice: @invoice_33, quantity: 10, unit_price: 2)#60
         1.times do
           create(:invoice_item, item: @merchant_2.items.first, invoice: @invoice_33, quantity: 10, unit_price: 3)#30
         end
-  
+
         3.times do
           create(:invoice_item, item: @merchant_2.items.second, invoice: @invoice_33, quantity: 10, unit_price: 4)#120
         end
@@ -194,7 +182,7 @@ RSpec.describe Merchant, type: :model do
         2.times do
           create(:invoice_item, item: @merchant_2.items.third, invoice: @invoice_43, quantity: 10, unit_price: 6)
         end
-  
+
         expected = [@merchant_2.items.second, @merchant_2.items.third, @merchant_2.items.first, @merchant_2.items.fourth, @merchant_2.items.fifth]
         expect(@merchant_2.top_5_items).to eq(expected)
       end
