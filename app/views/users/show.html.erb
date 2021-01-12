@@ -3,7 +3,7 @@
 <% end %>
 
 <% @customer.invoice_items.each do |invitem| %>
-  <%= invitem.item.name %>
+  <%= invitem.name %>
   <%= invitem.quantity %>
   <%= invitem.unit_price %>
 <% end %>

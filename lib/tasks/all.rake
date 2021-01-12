@@ -4,13 +4,19 @@ namespace :load_csv do
   desc "create all"
 
   task :customers => :environment do
-    i = 2
+    i = 0
     CSV.foreach('db/data/customers.csv',:headers => true) do |row|
+      user = User.create({first_name: row[1],
+                          last_name: row[2],
+                          email: "customer#{i += 1}@example.com",
+                          password: "password",
+                          user_name: "#{row[1]} #{row[2]}",
+                          role: 0
+                        })
     Customer.create!({id: row[0],
                       first_name: row[1],
                       last_name: row[2],
-                      email: "example#{i += 1}@example.com",
-                      password: "password",
+                      user: user,
                       created_at: row[3],
                       updated_at: row[4]
                       })
@@ -18,14 +24,20 @@ namespace :load_csv do
   end
 
   task :merchants => :environment do
-    Merchant.destroy_all
+    i = 0
     CSV.foreach('db/data/merchants.csv',:headers => true) do |row|
-      x = FactoryBot.create(:user)
+      user = User.create({first_name: row[1],
+                          last_name: row[2],
+                          email: "merchant#{i += 1}@example.com",
+                          password: "password",
+                          user_name: "#{row[1]} #{row[2]}",
+                          role: 1
+                        })
       Merchant.create!({id: row[0],
-                       name: row[1],
+                       user_name: row[1],
                        created_at: row[2],
                        updated_at: row[3],
-                       user_id: x.id
+                       user: user
                        })
     end
   end

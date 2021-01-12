@@ -2,9 +2,10 @@ class OrdersController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def create
-    @order = Order.new(cart.contents, current_customer)
+    @order = Order.new(cart.contents, current_user.customer)
     @order.create_invoices
-    redirect_to customer_path
+    binding.pry
+    redirect_to customer_path(current_user.customer.id)
   end
 
   def show

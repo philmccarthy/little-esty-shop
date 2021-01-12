@@ -1,12 +1,12 @@
 class Merchant < ApplicationRecord
-  validates_presence_of :name
+  validates_presence_of :user_name
   belongs_to :user
   has_many :items, dependent: :destroy
   has_many :invoices, dependent: :destroy
   has_many :invoice_items, through: :invoices
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
-  
+
   enum status: [:disabled, :enabled]
 
   def ready_to_ship
@@ -29,7 +29,7 @@ class Merchant < ApplicationRecord
 
   def top_5_items
     items
-    .joins(invoices: :transactions) 
+    .joins(invoices: :transactions)
       .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
       .where('transactions.result = ?', 1)
       .group('items.id')

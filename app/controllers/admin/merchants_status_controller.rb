@@ -1,6 +1,5 @@
-class Admin::MerchantsStatusController < ApplicationController
+class Admin::MerchantsStatusController < Admin::BaseController
   before_action :set_merchant, only: [:update]
-  before_action :authenticate_admin!
 
   def update
     @merchant.update(merchant_params)

@@ -1,0 +1,42 @@
+<h2><%= @merchant.user_name %></h3>
+
+<hr>
+<h3 style="text-align:center">My Items</h3>
+
+<%= link_to 'New Item', new_merchant_item_path(@merchant) %>
+
+<section id="items-enabled">
+  <h3>Enabled Items</h3>
+  <ul>
+  <% @merchant.items.enabled.each do |item| %>
+    <li>
+      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
+      <%= button_to 'Disable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "disabled"}}), method: :patch %>
+    </li>
+  <% end %>
+  </ul>
+</section>
+
+<section id="items-disabled">
+  <h3>Disabled Items</h3>
+  <ul>
+  <% @merchant.items.disabled.each do |item| %>
+    <li>
+      <%= link_to item.name, merchant_item_path(@merchant.id, item.id) %>
+      <%= button_to 'Enable', merchant_items_status_path(@merchant.id, item.id, {item: {status: "enabled"}}), method: :patch, id: "btn-enable-#{item.id}" %>
+    </li>
+  <% end %>
+  </ul>
+</section>
+
+<section id="top-items">
+  <h3>Top Items</h3>
+  <ol>
+    <% @merchant.top_5_items.each do |item| %>
+      <li>
+        <%= item.name %> - $<%= number_with_delimiter(item.total_revenue, delimiter: ',') %> in sales
+        <p><%= "Top day for #{item.name} was #{item.best_day}" %>
+      </li>
+    <% end %>
+  </ol>
+</section>

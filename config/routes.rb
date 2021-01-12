@@ -1,18 +1,19 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
-  devise_for :customers, controllers: {:sessions => "customers/sessions", :passwords => "customers/passwords", :registrations => "customers/registrations"}
+  devise_for :users, controllers: {:sessions => "users/sessions", :passwords => "users/passwords", :registrations => "users/registrations"}
+  resources :users, only: [:show]
   resources :customers, only: [:show]
-  resources :welcome, only: [:index, :show]
+  resources :welcome, only: [:index]
   resources :cart, only: [:show, :update, :destroy]
-  devise_for :users, :controllers => {:registrations => "users/registrations"}
-  devise_for :admins, controllers: {:sessions => "admins/sessions", :passwords => "admins/passwords", :registrations => "admins/registrations"}
+  resources :orders, only: [:create, :show]
+
   namespace :admin do
     resources :merchants, except: [:destroy]
     resources :merchants_status, only: [:update]
     resources :invoices, only: [:index, :show, :update]
   end
-  resources :orders, only: [:create, :show]
-  resources :merchants do
+
+  resources :merchants, module: :merchant do
     resources :items
     resources :items_status, controller: "merchant_items_status", only: [:update]
     resources :invoices

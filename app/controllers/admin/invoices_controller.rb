@@ -1,6 +1,5 @@
-class Admin::InvoicesController < ApplicationController
+class Admin::InvoicesController < Admin::BaseController
   before_action :set_invoice, only: [:show, :update]
-  before_action :authenticate_admin!
 
   def index
     @invoices = Invoice.all

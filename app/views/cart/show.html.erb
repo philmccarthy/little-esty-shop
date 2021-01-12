@@ -4,8 +4,8 @@
   <%= cart.count_of(item.id) %>
   <%= link_to 'Remove Item', "/cart/#{item.id}", method: :delete %>
 <% end %>
-<% if customer_signed_in? %>
+<% if user_signed_in? && current_user.customer != nil %>
   <%= link_to 'Create Order', orders_path, method: :post %>
 <% else %>
-  <%= link_to 'Sign in to Create Order', new_customer_session_path %>
+  <%= link_to 'Sign in to Create Order', new_user_session_path %>
 <% end %>
