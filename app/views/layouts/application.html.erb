@@ -59,30 +59,8 @@
       </div>
     </section>
 
-  <!-- The footer is commented out to avoid hitting the github API rate limits 
-         while running the rspec test suite. Uncomment to see API feature -->
-
-    <footer class="footer has-text-centered">
-      <% repo = GithubApi.new %>
-      <div class="columns">
-
-        <div class="column">
-          <p>GitHub Repository Name: <%= repo.call("")[:name] %></p>
-        </div>
-        
-        <div class="column">
-          <p>Number of Merged Pull Requests: <%= repo.count %></p>
-        </div>
-
-        <div class="column">
-          <p>Collaborators: <% repo.names.each do |name| %>
-                            <p><%= name %> - Commits: <%= repo.call("/commits?author=#{name}&per_page=100").size %></p>
-                         <% end %>
-          </p>
-        </div>
-      </div>
-    </footer>
-  <!-- -->
+  <!-- The footer with Github API consumptions is at /footer.txt to avoid hitting Github rate limits 
+         while running the rspec test suite. Copy/paste here to see feature in production. -->
 
   </body>
 </html>
