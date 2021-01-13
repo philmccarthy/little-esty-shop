@@ -11,6 +11,6 @@ class WelcomeController < ApplicationController
   private
 
   def set_items
-    @items = Item.all
+    @items = Item.with_enabled_merchants
   end
 end
