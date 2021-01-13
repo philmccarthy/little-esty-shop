@@ -60,6 +60,11 @@ en:
       show: 
         invoice: "Invoice"
         update_invoice: "Update Invoice"
+        items_on_this_invoice: "Items on this Invoice"
+        item_name: "Item Name"
+        quantity: "Quantity"
+        unit_price: "Unit Price"
+        status: "Status"
 
   merchant:
     invoices:
