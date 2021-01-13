@@ -16,7 +16,6 @@ Merchant.destroy_all
 User.destroy_all
 
 @user = FactoryBot.create(:user, role: 2, email: "admin@example.com", password: "password", password_confirmation: "password")
-
 20.times do
   @user = FactoryBot.create(:user, role: 1)
   @merchant = FactoryBot.create(:merchant, user_name: @user.user_name, user: @user)
