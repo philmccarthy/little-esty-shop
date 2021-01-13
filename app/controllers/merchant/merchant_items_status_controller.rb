@@ -1,9 +1,9 @@
-class MerchantItemsStatusController < ApplicationController
+class MerchantItemsStatusController < Merchant::BaseController
   before_action :set_item, only: [:update]
   before_action :set_merchant, only: [:update]
 
   def update
-    @item.update(item_params)
+    @item.update!(item_params)
     flash.notice = "#{@item.name}'s status was updated successfully!"
     redirect_to merchant_items_path(@merchant)
   end

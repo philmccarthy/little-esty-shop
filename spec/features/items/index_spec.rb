@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'merchants items index page', type: :feature do
   describe 'as a merchant' do
-    
     before(:each) do
-      @merchant = create(:merchant)
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
       @customer_1 = create(:customer)
       @invoice_1 = create(:invoice, merchant: @merchant, customer: @customer_1)
       @invoice_2 = create(:invoice, merchant: @merchant, customer: @customer_1)
@@ -59,6 +59,7 @@ RSpec.describe 'merchants items index page', type: :feature do
       5.times do
         create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0)
       end
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it 'can list all item names for specific merchant' do
@@ -102,7 +103,8 @@ RSpec.describe 'merchants items index page', type: :feature do
     end
 
     it 'has a top items section that displays top 5 items and total_revenue for each and historical best day for sales', :skip_before do
-      @merchant_2 = create(:merchant)
+      @user = create(:user, role: 1)
+      @merchant_2 = create(:merchant, user: @user)
       @customer_23 = create(:customer)
       @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
       @invoice_43 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
@@ -119,18 +121,19 @@ RSpec.describe 'merchants items index page', type: :feature do
       3.times do
         create(:invoice_item, item: @merchant_2.items.second, invoice: @invoice_33, quantity: 10, unit_price: 4)#120
       end
-        create(:invoice_item, item: @merchant_2.items.third, invoice: @invoice_33, quantity: 10, unit_price: 6)#60
-        create(:invoice_item, item: @merchant_2.items.fifth, invoice: @invoice_33, quantity: 10, unit_price: 1)#60
+      create(:invoice_item, item: @merchant_2.items.third, invoice: @invoice_33, quantity: 10, unit_price: 6)#60
+      create(:invoice_item, item: @merchant_2.items.fifth, invoice: @invoice_33, quantity: 10, unit_price: 1)#60
       2.times do
         create(:invoice_item, item: @merchant_2.items.third, invoice: @invoice_43, quantity: 10, unit_price: 6)
       end
-      
-      
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
       visit merchant_items_path(@merchant_2)
       within("#top-items") do
         expected = [@merchant_2.items.second, @merchant_2.items.third, @merchant_2.items.first, @merchant_2.items.fourth, @merchant_2.items.fifth]
         top_5 = @merchant_2.top_5_items
-        
+
         expect(page).to have_content("#{top_5[0].name} - $#{top_5[0].total_revenue.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}")
         expect(page).to have_content("Top day for #{top_5[0].name} was #{top_5[0].best_day}")
 

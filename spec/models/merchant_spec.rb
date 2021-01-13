@@ -8,6 +8,7 @@ RSpec.describe Merchant, type: :model do
   describe 'relationships' do
     it { should have_many :items }
     it { should have_many :invoices }
+    it { should belong_to :user}
     it { should have_many(:invoice_items).through(:invoices) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
@@ -15,10 +16,14 @@ RSpec.describe Merchant, type: :model do
 
   describe 'class methods' do
     before :each do
-      @merchant = create(:merchant)
-      @merchant1 = create(:merchant, status: 0)
-      @merchant2 = create(:merchant, status: 0)
-      @merchant3 = create(:merchant, status: 1)
+      @user1 = create(:user, role: 1)
+      @user2 = create(:user, role: 1)
+      @user3 = create(:user, role: 1)
+      @user4 = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user1)
+      @merchant1 = create(:merchant, status: 0, user: @user2)
+      @merchant2 = create(:merchant, status: 0, user: @user3)
+      @merchant3 = create(:merchant, status: 1, user: @user4)
     end
     it '::enabled' do
       expect(Merchant.enabled).to eq([@merchant3])
@@ -27,10 +32,14 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])
     end
     it '::top_5_revenue' do
-      merchant4 = create(:merchant, name: '4')
-      merchant5 = create(:merchant, name: '5')
-      merchant6 = create(:merchant, name: '6')
-      merchant7 = create(:merchant, name: '7')
+      @user5 = create(:user, role: 1)
+      @user6 = create(:user, role: 1)
+      @user7 = create(:user, role: 1)
+      @user8 = create(:user, role: 1)
+      merchant4 = create(:merchant, name: '4', user: @user5)
+      merchant5 = create(:merchant, name: '5', user: @user6)
+      merchant6 = create(:merchant, name: '6', user: @user7)
+      merchant7 = create(:merchant, name: '7', user: @user8)
   
       customer1 = create(:customer)
   
@@ -74,7 +83,8 @@ RSpec.describe Merchant, type: :model do
   describe 'instance methods' do
     describe 'environment for top 5 customers and ready-to-ship' do
       before :each do
-        @merchant = create(:merchant)
+        @user9 = create(:user, role: 1)
+        @merchant = create(:merchant, user: @user9)
         @customer_1 = create(:customer)
         @invoice_1 = create(:invoice, merchant: @merchant, customer: @customer_1)
         @invoice_2 = create(:invoice, merchant: @merchant, customer: @customer_1)
@@ -140,7 +150,8 @@ RSpec.describe Merchant, type: :model do
       end
 
       it '#best_day', :skip_before do
-        @merchant = create(:merchant)
+        @user = create(:user, role: 1)
+        @merchant = create(:merchant, user: @user)
         @customer_1 = create(:customer)
         @item_1 = create(:item, merchant: @merchant)
   
@@ -160,7 +171,8 @@ RSpec.describe Merchant, type: :model do
       end
   
       it '#top_5_items', :skip_before do
-        @merchant_2 = create(:merchant)
+        @user = create(:user, role: 1)
+        @merchant_2 = create(:merchant, user: @user)
         @customer_23 = create(:customer)
         @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
         @invoice_43 = create(:invoice, merchant: @merchant_2, customer: @customer_23)

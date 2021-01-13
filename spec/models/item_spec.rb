@@ -16,7 +16,8 @@ RSpec.describe Item, type: :model do
 
   describe 'instance methods' do
     it '#best day' do
-      @merchant_2 = create(:merchant)
+      @user = create(:user, role: 1)
+      @merchant_2 = create(:merchant, user: @user)
       @customer_23 = create(:customer)
       @invoice_33 = create(:invoice, merchant: @merchant_2, customer: @customer_23)
       @invoice_43 = create(:invoice, merchant: @merchant_2, customer: @customer_23)

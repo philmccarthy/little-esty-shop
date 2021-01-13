@@ -1,4 +1,4 @@
-class Admin::MerchantsController < ApplicationController
+class Admin::MerchantsController < Admin::BaseController
   before_action :set_merchant, only:[:show, :edit, :update]
 
   def index
@@ -7,18 +7,19 @@ class Admin::MerchantsController < ApplicationController
     @top_5_merchants = Merchant.top_5_merchants
   end
 
-  def show
-  end
-  
-  def edit
-  end
-
   def new
     @merchant = Merchant.new
   end
 
+  def edit
+  end
+
+  def show
+  end
+
   def create
-    @merchant = Merchant.new(merchant_params)
+    user = User.create(user_params)
+    user.merchant.new(merchant_params)
     if @merchant.save
       flash.notice = "Merchant #{@merchant.name} was created successfully!"
       redirect_to admin_merchants_path
@@ -35,18 +36,25 @@ class Admin::MerchantsController < ApplicationController
     else
       flash[:error] = @merchant.errors.full_messages
       set_merchant
-      render :edit 
+      render :edit
     end
   end
 
   private
+
+  def admin_only
+    render file: "/public/404" unless current_user.admin?
+  end
 
   def set_merchant
     @merchant = Merchant.find(params[:id])
   end
 
   def merchant_params
-    params.require(:merchant).permit(:name)
+    params.require(:merchant).permit(:user_name)
   end
 
+  def user_params
+    params.require(:merchant).permit(:user_name, :email, :password)
+  end
 end

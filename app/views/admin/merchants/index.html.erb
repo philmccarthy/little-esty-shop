@@ -11,7 +11,7 @@
         <p class="title">Enabled Merchants</p>
           <% @merchants_enabled.each do |merchant| %>
             <p class='merchant-<%= merchant.id %>'>
-            <%= link_to merchant.name, admin_merchant_path(merchant), class: 'is-size-5' %> 
+            <%= link_to merchant.user_name, admin_merchant_path(merchant), class: 'is-size-5' %> 
             <%= link_to 'Disable', admin_merchants_status_path(merchant, {merchant: {status: "disabled"}}), method: :patch, class: 'button is-pulled-right' %>
             </p>
           <% end %>
@@ -22,7 +22,7 @@
         <p class="title">Disabled Merchants</p>
         <% @merchants_disabled.each do |merchant| %>
           <p id='merchant-<%= merchant.id %>'>
-            <%= link_to merchant.name, admin_merchant_path(merchant), class: 'is-size-5' %>
+            <%= link_to merchant.user_name, admin_merchant_path(merchant), class: 'is-size-5' %>
             <%= link_to 'Enable', admin_merchants_status_path(merchant, {merchant: {status: "enabled"}}), method: :patch, class: 'button block is-pulled-right' %>
           </p>
         <% end %>
@@ -36,7 +36,7 @@
           <% @top_5_merchants.each do |merchant| %>
             <li class="block" id="merchant">
               <div class="tile is-child">
-                <p class="is-size-4"><%= merchant.name %>: <%= number_to_currency(merchant.total_revenue, precision: 0) %>
+                <p class="is-size-4"><%= merchant.user_name %>: <%= number_to_currency(merchant.total_revenue, precision: 0) %>
                 <p class="is-size-4" id="best-day">Top selling day was: <%= merchant.best_day %></p>
               </div>
             </li>

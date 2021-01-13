@@ -2,13 +2,23 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index' do
   before :each do
-    @merchant_1 = create(:merchant, status: 1)
-    @merchant_2 = create(:merchant)
-    @merchant_3 = create(:merchant)
-    @merchant_4 = create(:merchant)
-    @merchant_5 = create(:merchant)
-    @merchant_6 = create(:merchant)
-    @merchant_7 = create(:merchant)
+    @user = create(:user, role: 1)
+    @user1 = create(:user, role: 0)
+    @user2 = create(:user, role: 0)
+    @user3 = create(:user, role: 0)
+    @user4 = create(:user, role: 0)
+    @user5 = create(:user, role: 0)
+    @user6 = create(:user, role: 0)
+    @user7 = create(:user, role: 0)
+
+    @merchant_1 = create(:merchant, status: 1, user: @user7)
+    @merchant_2 = create(:merchant, user: @user1)
+    @merchant_3 = create(:merchant, user: @user2)
+    @merchant_4 = create(:merchant, user: @user3)
+    @merchant_5 = create(:merchant, user: @user4)
+    @merchant_6 = create(:merchant, user: @user5)
+    @merchant_7 = create(:merchant, user: @user6)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
   end
   describe 'List of Merchants' do
     it 'can show a list of each merchant in the system' do

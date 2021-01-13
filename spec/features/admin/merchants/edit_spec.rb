@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Show' do
   before :each do
-    @merchant_1 = create(:merchant)
+    @user = create(:user, role: 1)
+    @merchant_1 = create(:merchant, user: @user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
   end
   describe 'Admin Merchant Edit Page' do
     it 'can fill in the edit form' do

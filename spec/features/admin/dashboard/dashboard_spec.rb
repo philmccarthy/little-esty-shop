@@ -3,7 +3,8 @@ require 'rails_helper'
 describe 'As an Admin' do
   describe 'When i visit the admin dashboard' do
     before :each do
-      @merchant = create(:merchant)
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
 
       @customer_1 = create(:customer)
       @customer_2 = create(:customer)
@@ -21,6 +22,8 @@ describe 'As an Admin' do
       customer_list.size.times do |i|
         create_list(:transaction, (i+1), invoice: customer_list[i].invoices.first, result: 1)
       end
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it 'I the admins dashboard with nav links' do

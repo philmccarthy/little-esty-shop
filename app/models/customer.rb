@@ -1,7 +1,8 @@
 class Customer < ApplicationRecord
-  validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
-  validates :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
 
+  validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+  validates_presence_of :last_name
+  belongs_to :user
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
   has_many :merchants, through: :invoices
@@ -24,4 +25,11 @@ class Customer < ApplicationRecord
   def name
     first_name + " " + last_name
   end
+
+  def current_cart
+    sessions[:cart] = cart.contents
+    binding.pry
+  end
+
+
 end

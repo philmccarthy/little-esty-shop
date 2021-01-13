@@ -1,19 +1,21 @@
 require 'rails_helper'
 
-describe 'As an visitor' do
+describe 'As an admin' do
   describe 'When i visit an admin invoice show apge' do
     before :each do
-      @merchant = create(:merchant)
-
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
+      
       @customer_1 = create(:customer)
-
+      
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0)
-
+      
       @item = create(:item, merchant: @merchant)
       @item2 = create(:item, merchant: @merchant)
-
+      
       @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1, status: 0)
       @invoice_item2 = create(:invoice_item, item: @item2, invoice: @invoice_1, status: 0)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it 'I see the invoices attributes' do
