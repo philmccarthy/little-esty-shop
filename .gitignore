@@ -31,5 +31,5 @@
 config/application.yml
 
 coverage
-
+.idea/
 .DS_Store
