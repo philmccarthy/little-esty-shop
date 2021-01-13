@@ -45,4 +45,22 @@ RSpec.describe Item, type: :model do
       expect(@merchant_2.items.fourth.best_day).to eq(@invoice_33.date)
     end
   end
+
+  describe "Class methods" do
+    it '::with_enabled_merchants' do
+      @user1 = create(:user, role: 1)
+      @user2 = create(:user, role: 1)
+
+      @merchant_1 = create(:merchant, user: @user1, status: 1)
+      @merchant_2 = create(:merchant, user: @user2)
+
+      create_list(:item, 3, name: "xxx", merchant: @merchant_1)
+      create_list(:item, 6, merchant: @merchant_2)
+
+      expect(Item.with_enabled_merchants.count).to eq(3)
+      expect(Item.with_enabled_merchants.first.name).to eq("xxx")
+      expect(Item.with_enabled_merchants.second.name).to eq("xxx")
+      expect(Item.with_enabled_merchants.third.name).to eq("xxx")
+    end
+  end
 end
