@@ -24,8 +24,9 @@
       <div class="navbar-menu is-size-4" id="navbarData">
         <div class="navbar-start">
           <%= link_to t('shop'), '/', class: 'navbar-item' %>
-          <%= link_to 'English', lang: "en" %>
-          <%= link_to 'Spanish', lang: "es" %>
+          <% I18n.available_locales.each do |lang| %>
+            <%= link_to lang.to_s, lang: lang %></br>
+          <% end %>
         </div>
 
         <div class="navbar-end"></div>
