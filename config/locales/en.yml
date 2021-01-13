@@ -41,6 +41,22 @@ en:
   sign_up: "Sign Up"
   admin_dashboard: "Admin Dashboard"
   merchant_dashboard: "Merchant Dashboard"
+  
+  users:
+    shared:
+      links:
+        log_in: "Log in"
+        sign_up: "Sign up"
+        forgot_your_password: "Forgot your password?"
+        didnt_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+        didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
+        sign_in_with: "Sign in with"
+    registrations:
+      new:
+        join_esty: "Join Esty"
+        characters_minimum: "characters minimum"
+        sign_up: "Sign up"
+
   admin:
     dashboard:
       admin_nav:
@@ -79,6 +95,7 @@ en:
         edit_merchants_info: "Edit Merchant's Info"
       edit:
         info: "Info"
+
   cart:
     show:
       items_in_cart: "Items in Cart"
