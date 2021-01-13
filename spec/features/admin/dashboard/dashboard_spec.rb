@@ -21,7 +21,7 @@ describe 'As an Admin' do
       @customer_4 = create(:customer, user: @user5)
       @customer_5 = create(:customer, user: @user6)
       @customer_6 = create(:customer, user: @user7)
-      
+
       Customer.all.each do |customer|
         create_list(:invoice, 1, customer: customer, merchant: @merchant)
       end
@@ -46,7 +46,7 @@ describe 'As an Admin' do
     it 'I can see the top customers' do
       visit admin_index_path
 
-      
+
       within('#top-customers') do
         expect(page).to have_content("Top 5 Customers")
         expect(all('#customer')[0].text).to eq("#{@customer_6.name} - #{@customer_6.successful_purchases} Purchases")
@@ -75,17 +75,27 @@ describe 'As an Admin' do
 
       within("#incomplete-invoices") do
         expect(page).to have_content("Incomplete Invoices")
-        
-        expect(all('#invoice')[0].text).to eq("Invoice ##{@invoice_1.id} - #{@invoice_1.date}") 
-        expect(all('#invoice')[1].text).to eq("Invoice ##{@invoice_2.id} - #{@invoice_2.date}")  
-        expect(all('#invoice')[2].text).to eq("Invoice ##{@invoice_3.id} - #{@invoice_3.date}")   
-        expect(all('#invoice')[3].text).to eq("Invoice ##{@invoice_4.id} - #{@invoice_4.date}")  
-        
+
+        expect(all('#invoice')[0].text).to eq("Invoice ##{@invoice_1.id} - #{@invoice_1.date}")
+        expect(all('#invoice')[1].text).to eq("Invoice ##{@invoice_2.id} - #{@invoice_2.date}")
+        expect(all('#invoice')[2].text).to eq("Invoice ##{@invoice_3.id} - #{@invoice_3.date}")
+        expect(all('#invoice')[3].text).to eq("Invoice ##{@invoice_4.id} - #{@invoice_4.date}")
+
         expect(page).to have_link("Invoice ##{@invoice_1.id} - #{@invoice_1.date}")
         expect(page).to have_link("Invoice ##{@invoice_2.id} - #{@invoice_2.date}")
         expect(page).to have_link("Invoice ##{@invoice_3.id} - #{@invoice_3.date}")
         expect(page).to have_link("Invoice ##{@invoice_4.id} - #{@invoice_4.date}")
       end
+    end
+  end
+
+  describe 'cant view admin dashboard as a merchant' do
+    it 'cant do it' do
+      @user = create(:user, role: 1)
+      @merchant = create(:merchant, user: @user)
+      login_as(@user)
+      visit admin_index_path
+      expect(current_path).to eq("/")
     end
   end
 end
