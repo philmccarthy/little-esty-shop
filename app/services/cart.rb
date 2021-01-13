@@ -13,12 +13,6 @@ class Cart
     @contents[id.to_s] = count_of(id) + 1
   end
 
-  # def remove_item(id)
-  #   if @contents[id.to_s] > 0
-  #     @contents[id.to_s] = count_of(id) - 1
-  #   end
-  # end
-
   def remove_item(id)
     @contents.delete("#{id}")
   end

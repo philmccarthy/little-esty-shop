@@ -4,12 +4,15 @@ class Repo
     GithubApi.new
   end
 
+  def repo_name
+
+
   def pr_count
-    service.call("/pulls?state=closed").count
+    service.pulls.count
   end
 
   def names
-    service.call("/commits").map do |commit|
+    service.commits.map do |commit|
       commit[:author][:login]
     end.uniq
   end
@@ -17,7 +20,7 @@ class Repo
   def commits_count
     hash = {}
     names.each do |name|
-      hash[name] = service.call("/commits?author=#{name}&per_page=100").size
+      hash[name] = service.commits_by_author(name).size
     end
     hash
   end

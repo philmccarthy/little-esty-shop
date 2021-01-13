@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Cart do
   before :each do
-    @merchant = create(:merchant)
+    @user = create(:user, role: 1)
+    @merchant = create(:merchant, user: @user)
     @item = create(:item, merchant: @merchant)
     @item2 = create(:item, merchant: @merchant)
-    create(:customer)
+    @user2 = create(:user, role: 0)
   end
-  subject { Cart.new({ @item => 2, @item2 => 3 }) }
+  subject { Cart.new({ "#{@item.id}" => 2, "#{@item2.id}" => 3 }) }
 
   describe '#total_count' do
     it 'can calculate the total number of items it holds' do
-      cart = Cart.new({ @item => 2, @item2 => 3 })
+      cart = Cart.new({ "#{@item.id}" => 2, "#{@item2.id}" => 3 })
 
       expect(cart.total_count).to eq(5)
     end
@@ -19,11 +20,11 @@ RSpec.describe Cart do
 
   describe '#add_item' do
     it 'adds an item to its contents' do
-      cart = Cart.new({ @item => 2, @item2 => 3 })
-      subject.add_item(@item)
-      subject.add_item(@item2)
 
-      expect(subject.contents).to eq({@item => 3, @item2 =>4})
+      subject.add_item(@item.id)
+      subject.add_item(@item2.id)
+
+      expect(subject.contents).to eq({"#{@item.id}" => 3, "#{@item2.id}" =>4})
     end
   end
 
