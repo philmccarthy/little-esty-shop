@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index' do
   before :each do
-    @user = create(:user, role: 1)
-    @user1 = create(:user, role: 0)
-    @user2 = create(:user, role: 0)
-    @user3 = create(:user, role: 0)
-    @user4 = create(:user, role: 0)
-    @user5 = create(:user, role: 0)
-    @user6 = create(:user, role: 0)
-    @user7 = create(:user, role: 0)
+    @admin = create(:user, role: 2)
+
+    @user1 = create(:user, role: 1)
+    @user2 = create(:user, role: 1)
+    @user3 = create(:user, role: 1)
+    @user4 = create(:user, role: 1)
+    @user5 = create(:user, role: 1)
+    @user6 = create(:user, role: 1)
+    @user7 = create(:user, role: 1)
+    @user8 = create(:user, role: 0)
 
     @merchant_1 = create(:merchant, status: 1, user: @user7)
     @merchant_2 = create(:merchant, user: @user1)
@@ -18,22 +20,24 @@ RSpec.describe 'Admin Merchants Index' do
     @merchant_5 = create(:merchant, user: @user4)
     @merchant_6 = create(:merchant, user: @user5)
     @merchant_7 = create(:merchant, user: @user6)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+    login_as(@admin, scope: :user)
   end
   describe 'List of Merchants' do
     it 'can show a list of each merchant in the system' do
       visit admin_merchants_path
-      expect(page).to have_content(@merchant_1.name)
-      expect(page).to have_content(@merchant_2.name)
-      expect(page).to have_content(@merchant_3.name)
-      expect(page).to have_content(@merchant_4.name)
-      expect(page).to have_content(@merchant_5.name)
-      expect(page).to have_content(@merchant_6.name)
-      expect(page).to have_content(@merchant_7.name)
+
+      expect(page).to have_content(@merchant_1.user_name)
+      expect(page).to have_content(@merchant_2.user_name)
+      expect(page).to have_content(@merchant_3.user_name)
+      expect(page).to have_content(@merchant_4.user_name)
+      expect(page).to have_content(@merchant_5.user_name)
+      expect(page).to have_content(@merchant_6.user_name)
+      expect(page).to have_content(@merchant_7.user_name)
     end
     it 'can have show page links' do
       visit admin_merchants_path
-      click_on @merchant_1.name
+      click_on @merchant_1.user_name
 
       expect(current_path).to eq(admin_merchant_path(@merchant_1))
     end
@@ -46,23 +50,23 @@ RSpec.describe 'Admin Merchants Index' do
 
       within('#merchants-enabled') do
         expect(page).to have_content("Enabled Merchants")
-        expect(page).to have_content(@merchant_1.name)
+        expect(page).to have_content(@merchant_1.user_name)
         click_on 'Disable'
       end
 
       within('#merchants-disabled') do
         expect(page).to have_content("Disabled Merchants")
-        expect(page).to have_content(@merchant_1.name)
+        expect(page).to have_content(@merchant_1.user_name)
         
         first("#merchant-#{@merchant_2.id}").click_on('Enable')
-        expect(page).not_to have_content(@merchant_2.name)
+        expect(page).not_to have_content(@merchant_2.user_name)
       end
       within('#merchants-enabled') do
-        expect(page).to have_content(@merchant_2.name)
+        expect(page).to have_content(@merchant_2.user_name)
       end
     end
     it 'can display top 5 merchants by revenue' do
-      customer1 = create(:customer)
+      customer1 = create(:customer, user: @user8)
   
       invoice1 = create(:invoice, customer: customer1, merchant: @merchant_1)
       invoice2 = create(:invoice, customer: customer1, merchant: @merchant_2)
@@ -99,11 +103,11 @@ RSpec.describe 'Admin Merchants Index' do
 
       visit admin_merchants_path
       within '#merchants-revenue' do
-        expect(all('#merchant')[0].text).to eq("#{@merchant_1.name}: $300\nTop selling day was: #{@merchant_1.best_day}")
-        expect(all('#merchant')[1].text).to eq("#{@merchant_4.name}: $200\nTop selling day was: #{@merchant_4.best_day}")
-        expect(all('#merchant')[2].text).to eq("#{@merchant_6.name}: $120\nTop selling day was: #{@merchant_6.best_day}")
-        expect(all('#merchant')[3].text).to eq("#{@merchant_5.name}: $100\nTop selling day was: #{@merchant_5.best_day}")
-        expect(all('#merchant')[4].text).to eq("#{@merchant_3.name}: $80\nTop selling day was: #{@merchant_3.best_day}")
+        expect(all('#merchant')[0].text).to eq("#{@merchant_1.user_name}: $300\nTop selling day was: #{@merchant_1.best_day}")
+        expect(all('#merchant')[1].text).to eq("#{@merchant_4.user_name}: $200\nTop selling day was: #{@merchant_4.best_day}")
+        expect(all('#merchant')[2].text).to eq("#{@merchant_6.user_name}: $120\nTop selling day was: #{@merchant_6.best_day}")
+        expect(all('#merchant')[3].text).to eq("#{@merchant_5.user_name}: $100\nTop selling day was: #{@merchant_5.best_day}")
+        expect(all('#merchant')[4].text).to eq("#{@merchant_3.user_name}: $80\nTop selling day was: #{@merchant_3.best_day}")
       end
     end
   end
