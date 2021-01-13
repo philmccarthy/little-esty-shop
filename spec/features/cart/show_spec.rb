@@ -4,12 +4,12 @@ RSpec.describe "When a user tries to checkout" do
   it "displays a message" do
     @user = create(:user, role: 1)
     @customer = create(:customer, user: @user)
-    @merchant = create(:merchant, user: @user)
+    @merchant = create(:merchant, user: @user, status: 1)
     @item = create(:item, merchant: @merchant)
     @item2 = create(:item, merchant: @merchant)
     @user1 = create(:user, role: 1)
     @customer1 = create(:customer, user: @user1)
-    @merchant1 = create(:merchant, user: @user1)
+    @merchant1 = create(:merchant, user: @user1, status: 1)
 
     visit "/"
 
