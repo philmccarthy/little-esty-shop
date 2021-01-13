@@ -28,6 +28,15 @@ RSpec.describe Cart do
     end
   end
 
+  describe '#add_item' do
+    it 'adds an item to its contents' do
+
+      subject.remove_item(@item.id)
+
+      expect(subject.contents).to eq({"#{@item2.id}" =>3})
+    end
+  end
+
   describe '#count_of' do
     it 'returns count of all items in cart' do
       cart = Cart.new({})
