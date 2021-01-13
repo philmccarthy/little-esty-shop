@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
-  devise_for :users, controllers: {:sessions => "users/sessions", :passwords => "users/passwords", :registrations => "users/registrations"}
+  devise_for :users, controllers: {:registrations => "users/registrations"}
   resources :users, only: [:show]
   resources :customers, only: [:show]
   resources :welcome, only: [:index]
