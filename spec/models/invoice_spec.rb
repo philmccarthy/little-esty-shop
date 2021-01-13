@@ -16,7 +16,8 @@ RSpec.describe Invoice, type: :model do
     it '#date' do
       @user = create(:user, role: 1)
       @merchant = create(:merchant, user: @user)
-      @customer_1 = create(:customer)
+      @user1 = create(:user, role: 1)
+      @customer_1 = create(:customer, user: @user1)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
 
       expect(@invoice_1.date).to eq("Wednesday, Jan 25, 2012")
@@ -25,7 +26,8 @@ RSpec.describe Invoice, type: :model do
     it '#total_revenue' do
       @user = create(:user, role: 1)
       @merchant = create(:merchant, user: @user)
-      @customer_1 = create(:customer)
+      @user1 = create(:user, role: 1)
+      @customer_1 = create(:customer, user: @user1)
       @item = create(:item, merchant: @merchant)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
       2.times do
@@ -39,7 +41,8 @@ RSpec.describe Invoice, type: :model do
     it '#customer_name' do
       @user = create(:user, role: 1)
       @merchant = create(:merchant, user: @user)
-      @bob = create(:customer, first_name: "Cob", last_name: "Cornwall")
+      @user1 = create(:user, role: 1)
+      @bob = create(:customer, first_name: "Cob", last_name: "Cornwall", user: @user1)
       @invoice_1 = create(:invoice, customer: @bob, merchant: @merchant)
       expect(@invoice_1.customer_name).to eq("Cob Cornwall")
     end
@@ -49,8 +52,8 @@ RSpec.describe Invoice, type: :model do
     it '::incomplete_invoices' do
       @user = create(:user, role: 1)
       @merchant = create(:merchant, user: @user)
-      @customer_1 = create(:customer)
-
+      @user1 = create(:user, role: 1)
+      @customer_1 = create(:customer, user: @user1)
       @item_1 = create(:item, merchant: @merchant)
       @item_2 = create(:item, merchant: @merchant)
 

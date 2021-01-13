@@ -1,19 +1,20 @@
     <footer class="footer has-text-centered">
-      <% repo = GithubApi.new %>
+      <% repo = Repo.new %>
       <div class="columns">
 
         <div class="column">
-          <p>GitHub Repository Name: <%= repo.call("")[:name] %></p>
-        </div>
-        
-        <div class="column">
-          <p>Number of Merged Pull Requests: <%= repo.count %></p>
+          <p>GitHub Repository Name: <%= repo.service[:name] %></p>
         </div>
 
         <div class="column">
-          <p>Collaborators: <% repo.names.each do |name| %>
-                            <p><%= name %> - Commits: <%= repo.call("/commits?author=#{name}&per_page=100").size %></p>
-                         <% end %>
+          <p>Number of Merged Pull Requests: <%= repo.pr_count %></p>
+        </div>
+
+        <div class="column">
+          <p>Collaborators:
+            <% repo.commits_count do |x, y| %>
+              <%= x %> - <%= y %>
+            <% end %>
           </p>
         </div>
       </div>

@@ -9,13 +9,16 @@ class GithubApi
     github = JSON.parse(response.body, :symbolize_names => true)
   end
 
-  def count
-    call("/pulls?state=closed").count
+  def pulls
+    call("/pulls?state=closed")
   end
 
-  def names
-    call("/commits").map do |commit|
-      commit[:author][:login]
-    end.uniq
+  def commits
+    call("/commits")
   end
+
+  def commits_by_author(name)
+    call("/commits?author=#{name}&per_page=100")
+  end
+
 end
