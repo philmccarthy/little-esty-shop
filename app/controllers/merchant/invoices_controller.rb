@@ -1,4 +1,4 @@
-class InvoicesController < Merchant::BaseController
+class Merchant::InvoicesController < Merchant::BaseController
   skip_before_action only: [:create]
   before_action :authenticate_user!
   before_action do
