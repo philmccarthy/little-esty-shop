@@ -67,12 +67,16 @@ en:
         status: "Status"
     merchants:
       index:
+        all_esty_merchants: "All Esty Merchants"
         enabled_merchants: "Enabled Merchants"
         disabled_merchants: "Disabled Merchants"
         disable: "Disable"
         enable: "Enable"
         top_five_merchants_by_revenue: "Top 5 Merchants by Revenue"
         top_selling_day_was: "Top selling day was"
+      show:
+        merchant: "Merchant"
+        edit_merchants_info: "Edit Merchant's Info"
 
   merchant:
     invoices:
