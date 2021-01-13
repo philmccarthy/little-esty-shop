@@ -79,6 +79,15 @@ en:
         edit_merchants_info: "Edit Merchant's Info"
       edit:
         info: "Info"
+  cart:
+    show:
+      items_in_cart: "Items in Cart"
+      checkout: "Check Out"
+      item_name: "Item Name"
+      quantity: "Quantity"
+      unit_price: "Unit Price"
+      update: "Update"
+      remove_item: "Remove Item"
 
   merchant:
     invoices:
