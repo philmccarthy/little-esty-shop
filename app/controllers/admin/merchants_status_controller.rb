@@ -9,10 +9,6 @@ class Admin::MerchantsStatusController < Admin::BaseController
 
   private
 
-  def admin_only
-    render file: "/public/404" unless current_user.admin?
-  end
-
   def set_merchant
     @merchant = Merchant.find(params[:id])
   end
