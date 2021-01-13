@@ -5,7 +5,7 @@
     <div class="column box" id="incomplete-invoices">
       <p class="title has-text-centered"><%= t('.incomplete_invoices') %></p>
       <% @incomplete_invoices.each do |invoice| %>
-        <p class="block is-size-5" id='invoice'><%= link_to "#{t('.invoice')} #{invoice.id} - #{invoice.date}", admin_invoice_path(invoice) %></p>
+        <p class="block is-size-5" id='invoice'><%= link_to "#{t('.invoice')} ##{invoice.id} - #{invoice.date}", admin_invoice_path(invoice) %></p>
       <% end %>
     </div>
 

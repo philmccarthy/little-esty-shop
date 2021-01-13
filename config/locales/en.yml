@@ -67,7 +67,7 @@ en:
       index:
         incomplete_invoices: "Incomplete Invoices"
         invoice: "Invoice"
-        top_five_customers: "Top Five Customers"
+        top_five_customers: "Top 5 Customers"
         purchase: 'Purchase'
     invoices:
       index:
