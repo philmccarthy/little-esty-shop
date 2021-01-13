@@ -8,3 +8,9 @@ es:
   log_out: "Log Out"
   log_in: "Iniciar Sesión"
   sign_up: "Regístrate"
+  admin:
+    dashboard:
+      admin_nav:
+        dashboard_nav: "Tablero"
+        merchants: "Comerciantes"
+        invoices: "Facturas"

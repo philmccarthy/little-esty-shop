@@ -39,3 +39,14 @@ en:
   log_out: "Log Out"
   log_in: "Login"
   sign_up: "Sign Up"
+  admin:
+    dashboard:
+      admin_nav:
+        dashboard_nav: "Dashboard"
+        merchants: "Merchants"
+        invoices: "Invoices"
+      index:
+        incomplete_invoices: "Incomplete Invoices"
+        invoice: "Invoice"
+        top_five_customers: "Top Five Customers"
+        purchase: 'Purchase'
