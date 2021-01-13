@@ -65,6 +65,14 @@ en:
         quantity: "Quantity"
         unit_price: "Unit Price"
         status: "Status"
+    merchants:
+      index:
+        enabled_merchants: "Enabled Merchants"
+        disabled_merchants: "Disabled Merchants"
+        disable: "Disable"
+        enable: "Enable"
+        top_five_merchants_by_revenue: "Top 5 Merchants by Revenue"
+        top_selling_day_was: "Top selling day was"
 
   merchant:
     invoices:
