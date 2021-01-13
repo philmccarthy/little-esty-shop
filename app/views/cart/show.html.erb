@@ -1,11 +1,41 @@
-<h2> items in cart</h2>
-<% @item_list.each do |item| %>
-  <%= item.name %>
-  <%= cart.count_of(item.id) %>
-  <%= link_to 'Remove Item', "/cart/#{item.id}", method: :delete %>
-<% end %>
-<% if user_signed_in? && current_user.customer != nil %>
-  <%= link_to 'Create Order', orders_path, method: :post %>
-<% else %>
-  <%= link_to 'Sign in to Create Order', new_user_session_path %>
-<% end %>
+<nav class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <h2>Items in Cart</h2>
+    </div>
+  </div>
+
+  <div class="level-right">
+    <% if user_signed_in? && current_user.customer != nil %>
+      <%= link_to 'Check Out', orders_path, method: :post, class: 'button is-medium is-success' %>
+    <% else %>
+      <%= link_to 'Check Out', new_user_session_path, class: 'button is-medium is-success' %>
+    <% end %>
+  </div>
+</nav>
+<hr>
+
+<section class="section">
+  <table class="table is-striped is-hoverable">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody class="has-text-centered">
+      <tr>
+        <% @item_list.each do |item| %>
+          <div>
+          <td><%= item.name %></td>
+          <td><%= cart.count_of(item.id) %></td>
+          <td><%= number_to_currency(item.unit_price, precision: 0) %></td>
+          <td><%= link_to 'Remove Item', "/cart/#{item.id}", method: :delete, class: 'button is-danger is-light' %></td>
+          </div>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

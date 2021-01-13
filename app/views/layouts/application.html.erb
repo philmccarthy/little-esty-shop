@@ -21,7 +21,7 @@
         </a>
       </div>
 
-      <div class="navbar-menu" id="navbarData">
+      <div class="navbar-menu is-size-4" id="navbarData">
         <div class="navbar-start">
           <%= link_to 'Shop', '/', class: 'navbar-item' %>
         </div>
@@ -35,9 +35,11 @@
             <%= link_to 'current_user', edit_user_registration_path, class: 'navbar-item' %>
             <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'navbar-item' %>
           <% elsif user_signed_in? && current_user.customer? %>
-            <%= link_to 'current_customer', edit_user_registration_path, class: 'navbar-item' %>
+            <%= link_to 'My Account', edit_user_registration_path, class: 'navbar-item' %>
+            <%= link_to "My Cart", cart_path(cart), class: 'navbar-item' %>
             <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'navbar-item' %>
           <% else %>
+            <%= link_to "My Cart", cart_path(cart), class: 'navbar-item' %>
             <%= link_to 'Sign Up', new_user_registration_path, class: 'navbar-item' %>
             <%= link_to 'Login', new_user_session_path, class: 'navbar-item' %>
           <% end %>
@@ -63,10 +65,12 @@
             </div>
           </article>
         <% end %>
+        
+        <%= yield %>
+    
       </div>
     </section>
-
-    <%= yield %>
+    
     
     <footer class="footer">
       <!-- The footer with Github API consumptions is at /footer.txt to avoid hitting Github rate limits 
