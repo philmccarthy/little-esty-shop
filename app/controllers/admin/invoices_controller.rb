@@ -16,10 +16,6 @@ class Admin::InvoicesController < Admin::BaseController
 
   private
 
-  def admin_only
-    render file: "/public/404" unless current_user.admin?
-  end
-
   def invoice_params
     params.require(:invoice).permit(:quantity, :unit_price, :status)
   end
