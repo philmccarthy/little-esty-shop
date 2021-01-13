@@ -3,13 +3,19 @@ require 'rails_helper'
 describe 'As an admin' do
   describe 'When i visit the admin invoices index' do
     before :each do
-      @user = create(:user, role: 1)
-      @merchant = create(:merchant, user: @user)
-      @customer_1 = create(:customer)
+	    @admin = create(:user, role: 2)
+      @user1 = create(:user, role: 1)
+      @user2 = create(:user, role: 0)
+
+      @merchant = create(:merchant, user: @user1)
+
+      @customer_1 = create(:customer, user: @user2)
+
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant)
       @invoice_2 = create(:invoice, customer: @customer_1, merchant: @merchant)
       @invoice_3 = create(:invoice, customer: @customer_1, merchant: @merchant)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      login_as(@admin, scope: :user)
     end
 
     it 'I see the links to each invoice' do
