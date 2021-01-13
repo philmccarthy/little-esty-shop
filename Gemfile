@@ -41,8 +41,8 @@ gem "figaro"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
+gem "factory_bot"
 gem "faker"
-gem "factory_bot_rails"
 gem "devise"
 
 group :development, :test do
@@ -57,6 +57,7 @@ group :development, :test do
   gem "rails-erd"
   gem "awesome_print", :require => "ap"
   gem "hirb"
+  gem "factory_bot_rails"
   gem "webmock"
 end
 

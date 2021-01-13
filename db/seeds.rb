@@ -8,6 +8,32 @@
 
 # @ely_hess = User.create(name: "ely.hess@Me.com", password: "strongpassword", password_confirmation: "strongpassword", role: 1)
 
-FactoryBot.create(:user)
+InvoiceItem.destroy_all
+Item.destroy_all
+Transaction.destroy_all
+Invoice.destroy_all
+Customer.destroy_all
+Merchant.destroy_all
+User.destroy_all
 
-@admin = Admin.create!(user_name: "Admin", email: "admin@gmail.com", password: "admin")
+20.times do
+  @user = FactoryBot.create(:user, role: 1)
+  @merchant = FactoryBot.create(:merchant, user_name: @user.user_name, user: @user)
+  10.times do
+    FactoryBot.create(:item, merchant: @merchant)
+  end
+  @user2 = FactoryBot.create(:user)
+  @customer = FactoryBot.create(:customer, first_name: @user2.first_name, last_name: @user2.last_name, user: @user2)
+  5.times do
+    Invoice.create(status: Faker::Number.between(from: 0, to: 2), merchant: @merchant, customer: @customer)
+  end
+end
+
+
+5.times do
+  Invoice.all.each do |invoice|
+    item = invoice.merchant.items.sample
+    invoice.invoice_items.create(item: item, unit_price: item.unit_price)
+    FactoryBot.create(:transaction, invoice: invoice)
+  end
+end
