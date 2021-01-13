@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  root to: "welcome#index"
+  # root to: "welcome#index"
+  mount ActionCable.server => '/cable'
+
   devise_for :users, controllers: {:registrations => "users/registrations"}
   resources :users, only: [:show]
   resources :customers, only: [:show]
   resources :welcome, only: [:index]
   resources :cart, only: [:show, :update, :destroy]
   resources :orders, only: [:create, :show]
+
+  resources :chat_rooms, only: [:new, :create, :show, :update, :index]
+  root 'chat_rooms#index'
 
   namespace :admin do
     resources :merchants, except: [:destroy]
