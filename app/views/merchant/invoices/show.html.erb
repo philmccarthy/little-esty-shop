@@ -1,42 +1,45 @@
-<section>
-  <h3>Invoice: </h3>
-  <%= @invoice.id %>
-  <%= @invoice.status %>
+<%= render 'dashboard/merchant_nav' %>
 
+<p class="title has-text-centered">Invoice: <%= @invoice.id %></p>
 
-  <%= @invoice.date %>
-
-  <p>Total Revenue: <%= @invoice.total_revenue %>
-</section>
-
-<section>
-<h3>Customer: <%= @invoice.customer_name %></h3>
-<ul>
-  <li>Address: 123 Drury Ln</li>
-  <li>Nowhere, ID 10001</li>
-</ul>
-</section>
-
-<section>
-  <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Quantity</th>
-      <th>Unit Price</th>
-      <th colspan="2">Status</th>
-    </tr>
-    <tr>
-    <% @invoice.invoice_items.each do |invitem| %>
-      <div id="status-<%= invitem.id %>">
-        <td><%= invitem.item.name %></td>
-        <td><%= invitem.quantity %></td>
-        <td><%= invitem.unit_price %></td>
-        <td><%= form_with model: invitem, method: :patch, url: merchant_invoice_item_path(@invoice.merchant_id, invitem.id), local: true do |f| %>
-          <%= f.select :status, enum_collection_for_select(InvoiceItem.statuses), selected: invitem.status  %>
-          <%= button_tag 'Submit' %>
-        <% end %></td>
-      </div>
-    </tr>
+<section class="section is-size-4">
+  <p>Status: 
+    <% if @invoice.cancelled? %>
+      Cancelled
+    <% elsif @invoice.in_progress? %>
+      In Progress
+    <% else %>
+      Completed
     <% end %>
+  </p>
+  <%= render 'invoice_status' %>
+</section>
+
+<section class="section">
+  <p class="title">Items on this Invoice:</p>
+  <table class="table is-striped is-hoverable">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th colspan="2">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @invoice.invoice_items.each do |invitem| %>
+          <div id="status-<%= invitem.id %>">
+          <td><%= invitem.item.name %></td>
+          <td><%= invitem.quantity %></td>
+          <td><%= invitem.unit_price %></td>
+          <td><%= form_with model: invitem, method: :patch, url: merchant_invoice_item_path(@invoice.merchant_id, invitem.id), local: true do |f| %>
+              <%= f.select :status, enum_collection_for_select(InvoiceItem.statuses), selected: invitem.status  %>
+              <%= button_tag 'Submit' %></td>
+          </div>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
 </section>

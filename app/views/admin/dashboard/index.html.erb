@@ -1,21 +1,21 @@
-<h1>Admin Dashboard</h1>
-<p><%= link_to 'Admin Merchants', admin_merchants_path %></p>
-<p><%= link_to 'Admin Invoices', admin_invoices_path %></p>
+<%= render 'admin_nav' %>
 
-<section id="top-customers">
-  <h3>Top 5 Customers</h3>
-  <ol>
-    <% @top_five_customers.each do |customer| %>
-      <li class='customer'><%= customer.name %> - <%= customer.successful_purchases %> Purchases</li>
-    <% end %>
-  </ol>
-</section>
+<section class="section">
+  <div class="columns">
+    <div class="column box" id="incomplete-invoices">
+      <p class="title has-text-centered">Incomplete Invoices</p>
+      <% @incomplete_invoices.each do |invoice| %>
+        <p class="block is-size-5" id='invoice'><%= link_to "Invoice ##{invoice.id} - #{invoice.date}", admin_invoice_path(invoice) %></p>
+      <% end %>
+    </div>
 
-<section id="incomplete-invoices">
-  <h3>Incomplete Invoices</h3>
-  <ol>
-    <% @incomplete_invoices.each do |invoice| %>
-      <li class='invoice'><%= link_to "#{invoice.id} - #{invoice.date}", admin_invoices_path(invoice) %></li>
-    <% end %>
-  </ol>
+    <div class=column id="top-customers">
+      <p class="title has-text-centered">Top 5 Customers</p>
+      <ol>
+        <% @top_five_customers.each do |customer| %>
+          <li class="block is-size-5" id="customer"><%= customer.name %> - <%= pluralize(customer.successful_purchases, 'Purchase') %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 </section>

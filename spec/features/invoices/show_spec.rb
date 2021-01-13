@@ -43,7 +43,7 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       create(:transaction, result: 0, invoice: @invoice_7)
       
       @customer_6 = create(:customer)
-      @invoice_9 = create(:invoice, merchant: @merchant, customer: @customer_6, created_at: '2010-03-27 14:53:59')
+      @invoice_9 = create(:invoice, merchant: @merchant, customer: @customer_6, created_at: '2010-03-27 14:53:59', status: :completed)
       @invoice_10 = create(:invoice, merchant: @merchant, customer: @customer_6, created_at: '2010-01-27 14:53:59')
       create(:transaction, result: 1, invoice: @invoice_9)
       
@@ -70,16 +70,14 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
       
       expect(page).to have_content(@invoice_9.id)
-      expect(page).to have_content(@invoice_9.status)
+      expect(page).to have_content("Status: Completed")
       expect(page).to have_content(@invoice_9.date)
     end
 
     it 'can show customer info for invoice' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
 
-      expect(page).to have_content("Customer: #{@invoice_9.customer_name}")
-      expect(page).to have_content("Address: 123 Drury Ln")
-      expect(page).to have_content("Nowhere, ID 10001")
+      expect(page).to have_content(@invoice_9.customer_name)
     end
 
     it 'can show my items on the invoice' do
@@ -92,8 +90,7 @@ RSpec.describe 'merchants invoices index page', type: :feature do
 
     it 'can show total revenue for that invoice' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
-
-      expect(page).to have_content("Total Revenue: #{@invoice_9.total_revenue}")
+      expect(page).to have_content("Total Revenue: $#{@invoice_9.total_revenue.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse}")
     end
 
     it 'can enable/disable status of item' do

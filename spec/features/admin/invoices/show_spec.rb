@@ -22,11 +22,8 @@ describe 'As an admin' do
       visit admin_invoice_path(@invoice_1)
 
       within("#invoice-info") do
-        expect(page).to have_content("Invoice:")
-        expect(page).to have_content(@invoice_1.id)
-        expect(page).to have_content(@invoice_1.status)
         expect(page).to have_content(@invoice_1.date)
-        expect(page).to have_content(@invoice_1.total_revenue)
+        expect(page).to have_content(@invoice_1.total_revenue.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse)
       end
     end
 
@@ -34,8 +31,8 @@ describe 'As an admin' do
       visit admin_invoice_path(@invoice_1)
 
       within("#customer-info") do
-        expect(page).to have_content("Customer: #{@invoice_1.customer_name}")
-        expect(page).to have_content("Address: 123 Drury Ln")
+        expect(page).to have_content("#{@invoice_1.customer_name}")
+        expect(page).to have_content("123 Drury Ln")
         expect(page).to have_content("Nowhere, ID 10001")
       end
     end
@@ -43,18 +40,17 @@ describe 'As an admin' do
     it 'I can update the invoices status' do
       visit admin_invoice_path(@invoice_1)
 
-      within("#invoice-info") do
-        expect(page).to have_content("STATUS: cancelled")
-      end
-
       within("#update-status") do
+        expect(page).to have_content("Cancelled")
+        
         select("Completed", :from => "invoice[status]")
-        click_button "Submit"
+        
+        click_button "Update Invoice"
+        
+        expect(page).to have_content("Completed")
       end
 
-      within("#invoice-info") do
-        expect(page).to have_content("STATUS: completed")
-      end
+      expect(page).to have_content("Invoice successfully updated")
     end
   end
 end

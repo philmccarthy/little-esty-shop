@@ -1,24 +1,25 @@
 <h2><%= @merchant.user_name %></h2>
 
-<%= link_to 'Merchant Items', merchant_items_path(@merchant) %>
+<%= render 'merchant_nav' %>
+<section class="section">
+  <div class="columns">
+    <div class="column box" id="ready-to-ship">
+      <p class="title has-text-centered">Items Ready to Ship</p>
+      <ol>
+        <% @merchant.ready_to_ship.each do |item| %>
+          <li class="block is-size-5"><%= item.item_name %> - <%= item.invoice_date.strftime('%A, %b %d %Y') %>
+          <p id="invoice#{item.invoice_id}">Invoice ID: <%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %></p></li>
+        <% end %>
+      </ol>
+    </div>
 
-<%= link_to 'Merchant Invoices', merchant_invoices_path(@merchant) %>
-
-<section>
-<h3>Top 5 Customers</h3>
-<ol>
-  <% @merchant.top_5.each do |customer| %>
-    <li><%= "#{customer.first_name} #{customer.last_name} - Successful Transactions: #{customer.total_success}" %></li>
-  <% end %>
-</ol>
-</section>
-
-<section>
-  <h3>Items Ready to Ship</h3>
-  <ol>
-    <% @merchant.ready_to_ship.each do |item| %>
-      <li><%= item.item_name %> - <%= item.invoice_date.strftime('%A, %b %d %Y') %>
-      <p id="invoice#{item.invoice_id}">Invoice ID: <%= link_to item.invoice_id, merchant_invoice_path(@merchant.id, item.invoice_id) %></p></li>
-    <% end %>
-  </ol>
+    <div class="column" id="top-5-customers">
+      <p class="title has-text-centered">Top 5 Customers</p>
+      <ol>
+        <% @merchant.top_5.each do |customer| %>
+          <li class="block is-size-5"><%= "#{customer.first_name} #{customer.last_name}" %> - <%= pluralize customer.total_success, 'purchase' %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 </section>
