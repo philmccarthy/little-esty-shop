@@ -19,7 +19,15 @@ RSpec.describe "When a user adds items to their cart" do
     within("#item-#{@item.id}") do
       click_button "Add to Cart"
     end
+    click_on "Cart (3)"
 
-    expect(page).to have_content("You now have 2 copies of #{@item.name} in your cart.")
+    within("#item-#{@item.id}") do
+      click_on "Remove Item"
+    end
+    within("#item-#{@item2.id}") do
+      expect(page).to have_content("#{@item2.name}")
+    end
+
+    expect(page).to have_content("#{@item.name} has been removed from your cart.")
   end
 end
