@@ -57,6 +57,7 @@ User stories tracked using [Github projects](https://github.com/elyhess/little-e
 * session & account models with Devise Gem
 * shopping cart for customer roles
 * action cable chat feature
+* implement a CSS framework ([bulma](https://bulma.io/))
 
 <!-- PROJECT BOARD -->
 ## Project Board
@@ -113,7 +114,7 @@ To get a local copy up and running follow these simple steps.
 
 * [James Fox-Collis](https://github.com/jlfoxcollis) - jlfoxcollis@gmail.com
 * [Samuel Yeo](https://github.com/SK-Sam) - yeosamuel95@gmail.com
-* [Phil McCarthy](https://github.com/philmccarthy) - philmcc2631@gmail.com
+* [Phil McCarthy](https://github.com/philmccarthy) - hi@philmccarthy.dev
 * [Ely Hess](https://github.com/elyhess) - ely.hess@me.com
 
 
