@@ -33,7 +33,7 @@ end
 5.times do
   Invoice.all.each do |invoice|
     item = invoice.merchant.items.sample
-    invoice.invoice_items.create(item: item, unit_price: item.unit_price)
+    FactoryBot.create(:invoice_item, invoice: invoice, item: item, unit_price: item.unit_price)
     FactoryBot.create(:transaction, invoice: invoice)
   end
 end
