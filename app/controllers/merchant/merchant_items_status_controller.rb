@@ -1,4 +1,4 @@
-class MerchantItemsStatusController < Merchant::BaseController
+class Merchant::MerchantItemsStatusController < Merchant::BaseController
   before_action :set_item, only: [:update]
   before_action :set_merchant, only: [:update]
 
