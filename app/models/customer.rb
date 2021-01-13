@@ -1,5 +1,4 @@
 class Customer < ApplicationRecord
-
   validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
   validates_presence_of :last_name
   belongs_to :user

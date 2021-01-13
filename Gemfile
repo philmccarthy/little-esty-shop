@@ -41,6 +41,9 @@ gem "figaro"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
+gem "faker"
+gem "factory_bot_rails"
+gem "devise"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,10 +57,7 @@ group :development, :test do
   gem "rails-erd"
   gem "awesome_print", :require => "ap"
   gem "hirb"
-  gem "faker"
-  gem "factory_bot_rails"
   gem "webmock"
-  gem "devise"
 end
 
 group :development do
