@@ -23,6 +23,21 @@ describe "As an existing user" do
 			expect(current_path).to eq(root_path)
 		end
 
+		it 'login w/ invalid credentials' do
+			visit root_path
+
+			click_link "Login"
+
+			expect(current_path).to eq(new_user_session_path)
+
+			fill_in "user[email]", with: "user@example.com"
+			fill_in "user[password]", with: "xxxxx"
+			click_button "Log in"
+
+			expect(page).to have_content("Invalid Email or password.")
+			expect(current_path).to eq(new_user_session_path)
+		end
+
 		it 'logout customer' do
 			login_as @user
 			visit root_path
