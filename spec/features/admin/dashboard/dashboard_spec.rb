@@ -3,15 +3,24 @@ require 'rails_helper'
 describe 'As an Admin' do
   describe 'When i visit the admin dashboard' do
     before :each do
-      @user = create(:user, role: 1)
-      @merchant = create(:merchant, user: @user)
+	    @admin = create(:user, role: 2)
 
-      @customer_1 = create(:customer)
-      @customer_2 = create(:customer)
-      @customer_3 = create(:customer)
-      @customer_4 = create(:customer)
-      @customer_5 = create(:customer)
-      @customer_6 = create(:customer)
+      @user1 = create(:user, role: 1)
+      @user2 = create(:user, role: 0)
+      @user3 = create(:user, role: 0)
+      @user4 = create(:user, role: 0)
+      @user5 = create(:user, role: 0)
+      @user6 = create(:user, role: 0)
+      @user7 = create(:user, role: 0)
+
+      @merchant = create(:merchant, user: @user1)
+
+      @customer_1 = create(:customer, user: @user2)
+      @customer_2 = create(:customer, user: @user3)
+      @customer_3 = create(:customer, user: @user4)
+      @customer_4 = create(:customer, user: @user5)
+      @customer_5 = create(:customer, user: @user6)
+      @customer_6 = create(:customer, user: @user7)
       
       Customer.all.each do |customer|
         create_list(:invoice, 1, customer: customer, merchant: @merchant)
@@ -23,7 +32,7 @@ describe 'As an Admin' do
         create_list(:transaction, (i+1), invoice: customer_list[i].invoices.first, result: 1)
       end
 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      login_as(@admin, scope: :user)
     end
 
     it 'I the admins dashboard with nav links' do
