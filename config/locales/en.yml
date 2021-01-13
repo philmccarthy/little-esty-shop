@@ -57,3 +57,13 @@ en:
       index:
         invoices: "Invoices"
         invoice: "Invoice"
+      show: 
+        invoice: "Invoice"
+        update_invoice: "Update Invoice"
+
+  merchant:
+    invoices:
+      invoice_status:
+        created_on: "Created On"
+        total_revenue: "Total Revenue"
+        customer: "Customer"

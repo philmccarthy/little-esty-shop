@@ -1,6 +1,6 @@
 <%= render 'admin/dashboard/admin_nav' %>
 
-<p class="title has-text-centered">Invoice #<%= @invoice.id %></p>
+<p class="title has-text-centered"><%= t('.invoice')%> #<%= @invoice.id %></p>
 
 <section id="update-status">
   <%= form_with(model: [:admin, @invoice], method: :patch, url: admin_invoice_path(@invoice), local: true) do |f| %>
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="control">
-      <%= f.submit 'Update Invoice', class: 'button is-large is-warning' %>
+      <%= f.submit t('.update_invoice'), class: 'button is-large is-warning' %>
     </div>
   <% end %>
 </section>
