@@ -77,6 +77,8 @@ en:
       show:
         merchant: "Merchant"
         edit_merchants_info: "Edit Merchant's Info"
+      edit:
+        info: "Info"
 
   merchant:
     invoices:
