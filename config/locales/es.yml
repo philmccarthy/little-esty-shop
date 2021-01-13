@@ -1,3 +1,10 @@
 es:
   hello: "Hola Mundo!"
   shop_on_esty: "Compra En Esty"
+  shop: "Hacer Compras"
+  add_to_cart: "Agregar Al Carrito"
+  my_account: "Mi Cuenta"
+  my_cart: "Mi Carrito"
+  log_out: "Log Out"
+  log_in: "Iniciar Sesión"
+  sign_up: "Regístrate"

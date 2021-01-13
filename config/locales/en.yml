@@ -32,3 +32,10 @@
 en:
   hello: "Hello world"
   shop_on_esty: "Shop On Esty"
+  shop: "Shop"
+  add_to_cart: "Add To Cart"
+  my_account: "My Account"
+  my_cart: "My Cart"
+  log_out: "Log Out"
+  log_in: "Login"
+  sign_up: "Sign Up"
