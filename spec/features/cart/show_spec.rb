@@ -33,7 +33,7 @@ RSpec.describe "When a user tries to checkout" do
       click_on 'Check Out'
     end
 
-    expect(page).to have_content("Log in")
+    expect(page).to have_content("Login")
 
     fill_in "user[email]", with: "#{@user1.email}"
     fill_in "user[password]", with: "#{@user1.password}"
