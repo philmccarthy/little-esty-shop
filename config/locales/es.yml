@@ -5,9 +5,10 @@ es:
   add_to_cart: "Agregar Al Carrito"
   my_account: "Mi Cuenta"
   my_cart: "Mi Carrito"
-  log_out: "Log Out"
+  log_out: "Cerrar Sesión"
   log_in: "Iniciar Sesión"
   sign_up: "Regístrate"
+  admin_dashboard: "Panel De Administración"
 
   users:
     shared:
