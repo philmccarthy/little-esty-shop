@@ -23,7 +23,6 @@ RSpec.describe "When a user tries to checkout" do
     within("#item-#{@item.id}") do
       click_button "Add To Cart"
     end
-    save_and_open_page
     click_on "Cart (3)"
 
     within("#item-#{@item.id}") do
