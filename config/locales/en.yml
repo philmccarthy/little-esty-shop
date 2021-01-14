@@ -112,3 +112,12 @@ en:
         created_on: "Created On"
         total_revenue: "Total Revenue"
         customer: "Customer"
+      index:
+        my_invoices: "My Invoices"
+        invoice: "Invoice"
+      show:
+        items_on_this_invoice: "Items on this Invoice"
+        item_name: "Item Name"
+        quantity: "Quantity"
+        unit_price: "Unit Price"
+        status: "Status"
