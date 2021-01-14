@@ -54,7 +54,6 @@ User stories tracked using [Github projects](https://github.com/elyhess/little-e
 ### Extensions Complete
 * session & account models with Devise Gem
 * shopping cart for customer roles
-* action cable chat feature
 * implement a CSS framework ([bulma](https://bulma.io/))
 
 <!-- PROJECT BOARD -->
@@ -68,7 +67,7 @@ Check out the [Project board](https://github.com/elyhess/little-esty-shop/projec
 <!-- DATABBASE SCHEMA -->
 ## Database Schema
 
-<embed src="erd.pdf" type="application/pdf"   height="300px" width="100%">
+![Schema](https://github.com/elyhess/little-esty-shop/blob/main/schema1.png)
 
 <!-- BUILT WITH -->
 ## Built With
@@ -76,7 +75,7 @@ Check out the [Project board](https://github.com/elyhess/little-esty-shop/projec
 * [Ruby on Rails](https://rubyonrails.org/)
 * [Postgresql](https://www.postgresql.org/)
 * [Devise](https://github.com/heartcombo/devise)
-
+* [bulma](https://bulma.io/)
 
 <!-- SETUP INSTRUCTIONS -->
 ## Setup Instructions
