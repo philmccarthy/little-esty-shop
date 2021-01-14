@@ -50,6 +50,7 @@ RSpec.describe 'Admin Merchants Index' do
 
       within('#merchants-enabled') do
         expect(page).to have_content("Enabled Merchants")
+        save_and_open_page
         within("#merchant-#{@merchant_1.id}") do
           expect(page).to have_content(@merchant_1.user_name)
           click_link 'Disable'

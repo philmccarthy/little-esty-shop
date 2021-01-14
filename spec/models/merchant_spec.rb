@@ -20,13 +20,13 @@ RSpec.describe Merchant, type: :model do
       @user2 = create(:user, role: 1)
       @user3 = create(:user, role: 1)
       @user4 = create(:user, role: 1)
-      @merchant = create(:merchant, user: @user1)
+      @merchant = create(:merchant, status: 0, user: @user1)
       @merchant1 = create(:merchant, status: 0, user: @user2)
       @merchant2 = create(:merchant, status: 0, user: @user3)
       @merchant3 = create(:merchant, status: 1, user: @user4)
     end
     it '::enabled' do
-      expect(Merchant.enabled).to eq([@merchant3])
+      expect(Merchant.enabled.first.user_name).to eq(@merchant3.user_name)
     end
     it '::disabled' do
       expect(Merchant.disabled).to eq([@merchant, @merchant1, @merchant2])

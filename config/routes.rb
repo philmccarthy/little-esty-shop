@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
   devise_for :users, controllers: {:registrations => "users/registrations"}
   resources :users, only: [:show]
-  resources :customers, only: [:show]
+  resources :customers, only: [:show, :create]
   resources :welcome, only: [:index]
   resources :cart, only: [:show, :update, :destroy]
   resources :orders, only: [:create, :show]

@@ -12,12 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    create_dependents
-  end
-
-  def create_dependents
-    current_user.create_merchant(merchant_params)
-    current_user.create_customer(customer_params)
+    if current_user != nil
+      current_user.create_merchant(merchant_params)
+      current_user.create_customer(customer_params)
+    end
   end
 
   # GET /resource/edit
