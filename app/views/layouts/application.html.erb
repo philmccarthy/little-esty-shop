@@ -23,22 +23,25 @@
 
       <div class="navbar-menu is-size-4" id="navbarData">
         <div class="navbar-start">
-          <%= link_to 'Shop', '/', class: 'navbar-item' %>
+          <%= link_to t('shop'), "/", class: 'navbar-item' %>
+          <% I18n.available_locales.each do |lang| %>
+            <%= link_to lang.to_s, lang: lang %></br>
+          <% end %>
         </div>
 
         <div class="navbar-end"></div>
           <% if user_signed_in? && current_user.admin? %>
-            <%= link_to 'Admin Dashboard', admin_index_path, class: 'navbar-item' %>
-            <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'navbar-item' %>
+            <%= link_to t('admin_dashboard'), admin_index_path, class: 'navbar-item' %>
+            <%= link_to t('log_out'), destroy_user_session_path, method: :delete, class: 'navbar-item' %>
           <% elsif user_signed_in? && current_user.merchant? %>
             <%= link_to 'Merchant Dashboard', merchant_dashboard_index_path(current_user.merchant), class: 'navbar-item'%>
             <%= link_to "My Cart", cart_path(cart), class: 'navbar-item' %>
             <%= link_to current_user.user_name, edit_user_registration_path, class: 'navbar-item' %>
             <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'navbar-item' %>
           <% else %>
-            <%= link_to "My Cart", cart_path(cart), class: 'navbar-item' %>
-            <%= link_to 'Sign Up', new_user_registration_path, class: 'navbar-item' %>
-            <%= link_to 'Login', new_user_session_path, class: 'navbar-item' %>
+            <%= link_to t('my_account'), cart_path(cart), class: 'navbar-item' %>
+            <%= link_to t('sign_up'), new_user_registration_path, class: 'navbar-item' %>
+            <%= link_to t('log_in'), new_user_session_path, class: 'navbar-item' %>
           <% end %>
         </div>
       </div>
