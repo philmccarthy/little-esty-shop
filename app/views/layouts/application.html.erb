@@ -98,7 +98,7 @@
 
        <div class="column">
          <p>Collaborators:
-           <% repo.commits_count do |x, y| %>
+           <% repo.commits_count.each do |x, y| %>
              <%= x %> - <%= y %>
            <% end %>
          </p>
