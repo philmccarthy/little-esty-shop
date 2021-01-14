@@ -12,6 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    current_user.create_merchant(merchant_params)
+    current_user.create_customer(customer_params)
   end
 
   # GET /resource/edit
@@ -43,6 +45,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :role, :first_name, :last_name, :user_name])
+  end
+
+  def customer_params
+    params.require(:user).permit(:first_name, :last_name)
+  end
+
+  def merchant_params
+    params.require(:user).permit(:user_name)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
