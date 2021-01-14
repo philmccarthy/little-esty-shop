@@ -37,7 +37,6 @@ describe 'As an Admin' do
 
     it 'I the admins dashboard with nav links' do
       visit admin_index_path
-
       expect(page).to have_content('Admin Dashboard')
       expect(page).to have_link("Merchants")
       expect(page).to have_link("Invoices")
