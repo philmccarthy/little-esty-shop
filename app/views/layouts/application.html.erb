@@ -82,12 +82,29 @@
     </section>
     
     
-    <footer class="footer">
+    <footer class="footer has-text-centered">
       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
-      <!-- The footer with Github API consumptions is at /footer.txt to avoid hitting Github rate limits 
+      <!-- The footer with Github API consumptions is at /footer.txt to avoid hitting Github rate limits
              while running the rspec test suite. Copy/paste here to see feature in production. -->
-             
-    </footer>
+      <% repo = Repo.new %>
+      <div class="columns">
 
+        <div class="column">
+          <p>GitHub Repository Name: <%= repo.service[:name] %></p>
+        </div>
+
+        <div class="column">
+          <p>Number of Merged Pull Requests: <%= repo.pr_count %></p>
+        </div>
+
+        <div class="column">
+          <p>Collaborators:
+            <% repo.commits_count do |x, y| %>
+              <%= x %> - <%= y %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
