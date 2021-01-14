@@ -2,19 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Index' do
   before :each do
-    @admin = create(:user, role: 2)
+    @admin = create(:user, role: 1)
 
-    @user1 = create(:user, role: 1)
-    @user2 = create(:user, role: 1)
-    @user3 = create(:user, role: 1)
-    @user4 = create(:user, role: 1)
-    @user5 = create(:user, role: 1)
-    @user6 = create(:user, role: 1)
-    @user7 = create(:user, role: 1)
+    @user1 = create(:user, role: 0)
+    @user2 = create(:user, role: 0)
+    @user3 = create(:user, role: 0)
+    @user4 = create(:user, role: 0)
+    @user5 = create(:user, role: 0)
+    @user6 = create(:user, role: 0)
+    @user7 = create(:user, role: 0)
     @user8 = create(:user, role: 0)
 
     @merchant_1 = create(:merchant, status: 1, user: @user7)
-    @merchant_2 = create(:merchant, user: @user1)
+    @merchant_2 = create(:merchant, status: 0, user: @user1)
     @merchant_3 = create(:merchant, user: @user2)
     @merchant_4 = create(:merchant, user: @user3)
     @merchant_5 = create(:merchant, user: @user4)
@@ -47,13 +47,14 @@ RSpec.describe 'Admin Merchants Index' do
       within('#merchants-enabled') do
         expect(page).to have_content("Enabled Merchants")
         expect(page).to have_content(@merchant_1.user_name)
-        click_on 'Disable'
+        first("#merchant-#{@merchant_1.id}").click_on('Disable')
+        expect(page).to_not have_content(@merchant_1.user_name)
       end
 
       within('#merchants-disabled') do
         expect(page).to have_content("Disabled Merchants")
         expect(page).to have_content(@merchant_1.user_name)
-        
+
         first("#merchant-#{@merchant_2.id}").click_on('Enable')
         expect(page).not_to have_content(@merchant_2.user_name)
       end
@@ -63,7 +64,7 @@ RSpec.describe 'Admin Merchants Index' do
     end
     it 'can display top 5 merchants by revenue' do
       customer1 = create(:customer, user: @user8)
-  
+
       invoice1 = create(:invoice, customer: customer1, merchant: @merchant_1)
       invoice2 = create(:invoice, customer: customer1, merchant: @merchant_2)
       invoice3 = create(:invoice, customer: customer1, merchant: @merchant_3)

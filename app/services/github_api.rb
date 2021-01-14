@@ -11,6 +11,7 @@ class GithubApi
 
   def pulls
     call("/pulls?state=closed")
+
   end
 
   def commits

@@ -9,9 +9,9 @@
       <div class="tile is-child box" id="merchants-enabled">
         <p class="title"><%= t('.enabled_merchants') %></p>
           <% @merchants_enabled.each do |merchant| %>
-            <p class='merchant-<%= merchant.id %>'>
-            <%= link_to merchant.user_name, admin_merchant_path(merchant), class: 'is-size-5' %> 
-            <%= link_to t('.disable'), admin_merchants_status_path(merchant, {merchant: {status: "disabled"}}), method: :patch, class: 'button is-pulled-right' %>
+            <p id='merchant-<%= merchant.id %>'>
+            <%= link_to merchant.user_name, admin_merchant_path(merchant), class: 'is-size-5' %>
+            <%= link_to 'Disable', admin_merchants_status_path(merchant, {merchant: {status: "disabled"}}), method: :patch, class: 'button is-pulled-right' %>
             </p>
           <% end %>
         </p>

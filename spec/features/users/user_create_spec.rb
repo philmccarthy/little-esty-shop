@@ -31,8 +31,8 @@ describe "As a visitor" do
 			fill_in "user[last_name]", with: "last"
 			fill_in "user[password]", with: "password"
 			fill_in "user[password_confirmation]", with: "xxx"
-			click_button "Sign up"
 
+			click_button "Sign up"
 			expect(page).to have_content("Password confirmation doesn't match Password")
 			expect(current_path).to eq("/users")
 		end

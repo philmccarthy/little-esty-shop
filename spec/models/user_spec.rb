@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
 
   describe 'instance methods' do
     it 'can return a collection' do
-      expect(enum_collection_for_select(User.roles, include_blank = false).flatten.uniq).to eq(["Customer", "customer", "Merchant", "merchant", "Admin", "admin"])
+      expect(enum_collection_for_select(User.roles, include_blank = false).flatten.uniq).to eq(["Merchant", "merchant", "Admin", "admin"])
     end
   end
 end

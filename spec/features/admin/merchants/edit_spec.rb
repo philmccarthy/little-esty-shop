@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Merchants Show' do
   before :each do
-    @admin = create(:user, role: 2)
-    @user1 = create(:user, role: 1)
+    @admin = create(:user, role: 1)
+    @user1 = create(:user, role: 0)
 
     @merchant_1 = create(:merchant, user: @user1)
 

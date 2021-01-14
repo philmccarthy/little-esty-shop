@@ -9,7 +9,7 @@ RSpec.describe 'merchants items index page', type: :feature do
       Invoice.destroy_all
       User.destroy_all
 
-      @user = create(:user, role: 1)
+      @user = create(:user, role: 0)
       @merchant = create(:merchant, user: @user)
 
       @user1 = create(:user, role: 0)
@@ -86,7 +86,7 @@ RSpec.describe 'merchants items index page', type: :feature do
     end
 
     it 'my page has sections for enabled and disabled items and each item has a button that changes its status' do
-      item = Item.first
+      item = create(:item, merchant: @merchant, status: 0)
 
       visit merchant_items_path(@merchant)
 
