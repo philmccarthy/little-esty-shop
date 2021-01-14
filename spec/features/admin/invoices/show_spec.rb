@@ -3,19 +3,19 @@ require 'rails_helper'
 describe 'As an admin' do
   describe 'When i visit an admin invoice show apge' do
     before :each do
-      @admin = create(:user, role: 2)
-      @user1 = create(:user, role: 1)
+      @admin = create(:user, role: 1)
+      @user1 = create(:user, role: 0)
       @user2 = create(:user, role: 0)
 
       @merchant = create(:merchant, user: @user1)
-      
+
       @customer_1 = create(:customer, user: @user2)
-      
+
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0)
-      
+
       @item = create(:item, merchant: @merchant)
       @item2 = create(:item, merchant: @merchant)
-      
+
       @invoice_item = create(:invoice_item, item: @item, invoice: @invoice_1, status: 0)
       @invoice_item2 = create(:invoice_item, item: @item2, invoice: @invoice_1, status: 0)
 
@@ -46,11 +46,11 @@ describe 'As an admin' do
 
       within("#update-status") do
         expect(page).to have_content("Cancelled")
-        
+
         select("Completed", :from => "invoice[status]")
-        
+
         click_button "Update Invoice"
-        
+
         expect(page).to have_content("Completed")
       end
 

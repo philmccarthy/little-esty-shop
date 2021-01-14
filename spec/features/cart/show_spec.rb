@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "When a user tries to checkout" do
   it "displays a message" do
-    @user = create(:user, role: 1)
+    @user = create(:user, role: 0)
     @customer = create(:customer, user: @user)
     @merchant = create(:merchant, user: @user, status: 1)
     @item = create(:item, merchant: @merchant)
     @item2 = create(:item, merchant: @merchant)
-    @user1 = create(:user, role: 1)
+    @user1 = create(:user, role: 0)
     @customer1 = create(:customer, user: @user1)
     @merchant1 = create(:merchant, user: @user1, status: 1)
 

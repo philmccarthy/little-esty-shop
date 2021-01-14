@@ -9,7 +9,7 @@ RSpec.describe 'merchants can update items', type: :feature do
       Invoice.destroy_all
       User.destroy_all
 
-      @user = create(:user, role: 1)
+      @user = create(:user, role: 0)
       @merchant = create(:merchant, user: @user)
 
       @user1 = create(:user, role: 0)
@@ -74,11 +74,11 @@ RSpec.describe 'merchants can update items', type: :feature do
       end
       login_as(@user, scope: :user)
     end
-    
+
     it 'can update and see items info in form' do
       item = @merchant.items.first
       visit merchant_item_path(@merchant.id, item.id)
-      
+
       click_on 'Edit Item'
 
       expect(current_path).to eq(edit_merchant_item_path(@merchant.id, item.id))

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'As an admin' do
   describe 'When i visit the admin invoices index' do
     before :each do
-	    @admin = create(:user, role: 2)
-      @user1 = create(:user, role: 1)
+	    @admin = create(:user, role: 1)
+      @user1 = create(:user, role: 0)
       @user2 = create(:user, role: 0)
 
       @merchant = create(:merchant, user: @user1)
@@ -20,8 +20,8 @@ describe 'As an admin' do
 
     it 'I see the links to each invoice' do
       visit admin_invoices_path
-      
-      within("#invoices") do 
+
+      within("#invoices") do
         expect(page).to have_content(@invoice_1.id)
         expect(page).to have_content(@invoice_2.id)
         expect(page).to have_content(@invoice_3.id)

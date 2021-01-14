@@ -9,7 +9,7 @@ RSpec.describe 'merchants items show page', type: :feature do
       Invoice.destroy_all
       User.destroy_all
 
-      @user = create(:user, role: 1)
+      @user = create(:user, role: 0)
       @merchant = create(:merchant, user: @user)
 
       @user1 = create(:user, role: 0)
@@ -74,7 +74,7 @@ RSpec.describe 'merchants items show page', type: :feature do
       end
       login_as(@user, scope: :user)
     end
-    
+
     it 'can show an an items name, description, current selling price.' do
       visit merchant_item_path(@merchant.id, @merchant.items.first.id)
 

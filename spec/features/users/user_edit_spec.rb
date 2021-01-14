@@ -4,12 +4,14 @@ describe "As a signed in user" do
 	describe "I can" do
 		before :each do
 			@user = create(:user, email: "user@example.com", password: "password", password_confirmation: "password")
+			@merchant = create(:merchant, user: @user)
+			@customer = create(:customer, user: @user)
 			login_as @user
 		end
 		it 'edit my account info' do
 			visit root_path
 
-			click_link "My Account"
+			click_link "#{@user.user_name}"
 
 			expect(current_path).to eq(edit_user_registration_path)
 
