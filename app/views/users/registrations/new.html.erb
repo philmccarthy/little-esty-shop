@@ -1,6 +1,6 @@
 <section class="section">
 
-  <h2 class="has-text-centered">Join Esty</h2>
+  <h2 class="has-text-centered"><%= t('.join_esty') %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
@@ -28,7 +28,7 @@
     <div class="field">
       <%= f.label :password, class: 'label is-large' %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> <%= t('.characters_minimum') %>)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password", class: 'input is-large' %>
     </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Sign up", class: 'input button is-large is-success' %>
+      <%= f.submit t(".sign_up"), class: 'input button is-large is-success' %>
     </div>
   <% end %>
 
