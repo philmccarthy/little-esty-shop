@@ -52,9 +52,9 @@ User stories tracked using [Github projects](https://github.com/elyhess/little-e
 * Deployed application on [Heroku](https://immense-ocean-82455.herokuapp.com/)
 
 ### Extensions Complete
-* session & account models with Devise Gem
-* shopping cart for customer roles
-* implement a CSS framework ([bulma](https://bulma.io/))
+* Session & account models with Devise Gem
+* Shopping cart for customer roles
+* Implement a CSS framework
 
 <!-- PROJECT BOARD -->
 ## Project Board
@@ -75,7 +75,7 @@ Check out the [Project board](https://github.com/elyhess/little-esty-shop/projec
 * [Ruby on Rails](https://rubyonrails.org/)
 * [Postgresql](https://www.postgresql.org/)
 * [Devise](https://github.com/heartcombo/devise)
-* [bulma](https://bulma.io/)
+* [Bulma](https://bulma.io/)
 
 <!-- SETUP INSTRUCTIONS -->
 ## Setup Instructions
