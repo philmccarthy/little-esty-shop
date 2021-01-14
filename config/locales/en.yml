@@ -107,6 +107,17 @@ en:
       remove_item: "Remove Item"
 
   merchant:
+    dashboard:
+      merchant_nav:
+        merchant_dashboard: "Merchant Dashboard"
+        dashboard: "Dashboard"
+        my_items: "My Items"
+        my_invoices: "My Invoices"
+      index:
+        items_ready_to_ship: "Items Ready to Ship"
+        invoice_id: "Invoice ID"
+        top_five_customers: "Top 5 Customers"
+        purchase: "purchase"
     invoices:
       invoice_status:
         created_on: "Created On"
