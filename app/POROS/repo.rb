@@ -5,6 +5,7 @@ class Repo
   end
 
   def repo_name
+    service.call("")
   end
 
 
