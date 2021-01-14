@@ -121,3 +121,16 @@ en:
         quantity: "Quantity"
         unit_price: "Unit Price"
         status: "Status"
+        submit: "Submit"
+    items:
+      edit:
+        edit: "Edit"
+      index:
+        my_items: "My Items"
+        create_new_item: "Create New Item"
+        enabled_items: "Enabled Items"
+        disable: "Disable"
+        disabled_items: "Disabled Items"
+        enable: "Enable"
+        top_items: "Top Items"
+        top_day_for: "Top day for"
