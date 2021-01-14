@@ -1,5 +1,5 @@
 es:
-  cart: "Carrito"
+  dashboard_cart: "Carrito"
   hello: "Hola Mundo!"
   shop_on_esty: "Compra En Esty"
   shop: "Hacer Compras"
