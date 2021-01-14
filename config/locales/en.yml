@@ -30,6 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  cart: "Cart"
   hello: "Hello world"
   shop_on_esty: "Shop On Esty"
   shop: "Shop"

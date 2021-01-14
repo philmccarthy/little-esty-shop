@@ -1,4 +1,5 @@
 es:
+  cart: "Carrito"
   hello: "Hola Mundo!"
   shop_on_esty: "Compra En Esty"
   shop: "Hacer Compras"
