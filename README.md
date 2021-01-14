@@ -67,7 +67,7 @@ Check out the [Project board](https://github.com/elyhess/little-esty-shop/projec
 <!-- DATABBASE SCHEMA -->
 ## Database Schema
 
-![Schema](https://github.com/elyhess/little-esty-shop/blob/main/schema1.png)
+![Schema](https://github.com/elyhess/little-esty-shop/blob/main/schema2.png)
 
 <!-- BUILT WITH -->
 ## Built With
