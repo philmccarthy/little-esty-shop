@@ -134,3 +134,7 @@ en:
         enable: "Enable"
         top_items: "Top Items"
         top_day_for: "Top day for"
+      show:
+        description: "Description"
+        current_price: "Current Price"
+        edit_item: "Edit Item"
