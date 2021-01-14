@@ -14,7 +14,7 @@ RSpec.describe 'Admin Merchants Index' do
     @user8 = create(:user, role: 0)
 
     @merchant_1 = create(:merchant, status: 1, user: @user7)
-    @merchant_2 = create(:merchant, user: @user1)
+    @merchant_2 = create(:merchant, status: 0, user: @user1)
     @merchant_3 = create(:merchant, user: @user2)
     @merchant_4 = create(:merchant, user: @user3)
     @merchant_5 = create(:merchant, user: @user4)
@@ -46,11 +46,9 @@ RSpec.describe 'Admin Merchants Index' do
 
       within('#merchants-enabled') do
         expect(page).to have_content("Enabled Merchants")
-        save_and_open_page
-        within("#merchant-#{@merchant_1.id}") do
-          expect(page).to have_content(@merchant_1.user_name)
-          click_link 'Disable'
-        end
+        expect(page).to have_content(@merchant_1.user_name)
+        first("#merchant-#{@merchant_1.id}").click_on('Disable')
+        expect(page).to_not have_content(@merchant_1.user_name)
       end
 
       within('#merchants-disabled') do
