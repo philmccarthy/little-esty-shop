@@ -104,6 +104,25 @@ To get a local copy up and running follow these simple steps.
    ```
    rails s
    ```
+   
+OR
+
+1. Visit heroku
+   ```
+   https://immense-ocean-82455.herokuapp.com/
+   ```
+
+1. Login
+   ```
+   Admin:
+   email: admin@example.com
+   password: password
+   
+   User:
+   email: alberto@zulauf.org
+   password: strongpassword
+   ```
+
 
 <!-- CONTACT -->
 ## Contact
