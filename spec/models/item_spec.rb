@@ -52,7 +52,7 @@ RSpec.describe Item, type: :model do
       @user2 = create(:user, role: 1)
 
       @merchant_1 = create(:merchant, user: @user1, status: 1)
-      @merchant_2 = create(:merchant, user: @user2)
+      @merchant_2 = create(:merchant, user: @user2, status: 0)
 
       create_list(:item, 3, name: "xxx", merchant: @merchant_1)
       create_list(:item, 6, merchant: @merchant_2)

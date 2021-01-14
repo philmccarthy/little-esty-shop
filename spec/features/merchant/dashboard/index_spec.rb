@@ -9,7 +9,7 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       Invoice.destroy_all
       User.destroy_all
 
-      @user = create(:user, role: 1)
+      @user = create(:user, role: 0)
       @merchant = create(:merchant, user: @user)
 
       @user2 = create(:user, role:0)
@@ -55,27 +55,27 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       @invoice_9 = create(:invoice, merchant: @merchant, customer: @customer_6, created_at: '2010-03-27 14:53:59')
       @invoice_10 = create(:invoice, merchant: @merchant, customer: @customer_6, created_at: '2010-01-27 14:53:59')
       create(:transaction, result: 1, invoice: @invoice_9)
-      
+
       create_list(:item, 3, merchant: @merchant)
-      
+
       5.times do
         create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
       end
-      
+
       2.times do
         create(:invoice_item, item: Item.second, invoice: @invoice_9, status: 1)
       end
       3.times do
         create(:invoice_item, item: Item.second, invoice: @invoice_7, status: 1)
       end
-      
+
       5.times do
         create(:invoice_item, item: Item.third, invoice: Invoice.all.sample, status: 0)
       end
 
       login_as(@user, scope: :user)
     end
-    
+
     it 'When I visit my merchant dashboard then I see the name of my merchant' do
       visit merchant_dashboard_index_path(@merchant)
       expect(page).to have_content(@merchant.user_name)

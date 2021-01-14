@@ -8,5 +8,5 @@ class User < ApplicationRecord
   # validates_presence_of :last_name, :first_name
 
 
-  enum role: [:customer, :merchant, :admin]
+  enum role: [:merchant, :admin]
 end
