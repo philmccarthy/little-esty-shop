@@ -10,6 +10,7 @@ es:
   log_in: "Iniciar Sesión"
   sign_up: "Regístrate"
   admin_dashboard: "Panel De Administración"
+  merchant_dashboard: "Tablero De Comerciantes"
 
   users:
     shared:
@@ -76,8 +77,45 @@ es:
       remove_item: "Remover El Artículo"
 
   merchant:
+    dashboard:
+      merchant_nav:
+        merchant_dashboard: "Tablero De Comerciantes"
+        dashboard: "Tablero"
+        my_items: "Mis Cosas"
+        my_invoices: "Mis Facturas"
+      index:
+        items_ready_to_ship: "Artículos Listos Para Enviar"
+        invoice_id: "ID De Factura"
+        top_five_customers: "Los 5 Mejores Clientes"
+        purchase: "compra"
     invoices:
       invoice_status:
-        created_on: "Creado en"
+        created_on: "Creado En"
         total_revenue: "Los Ingresos Totales"
         customer: "Cliente"
+      index:
+        my_invoices: "Mis Facturas"
+        invoice: "Factura"
+      show:
+        items_on_this_invoice: "Elementos De Esta Factura"
+        item_name: "Nombre del árticulo"
+        quantity: "Cantidad"
+        unit_price: "Precio Unitario"
+        status: "Estado"
+        submit: "Enviar"
+    items:
+      edit:
+        edit: "Editar"
+      index:
+        my_items: "Mis Cosas"
+        create_new_item: "Crear Nuevo Artículo"
+        enabled_items: "Elementos Habilitados"
+        disable: "Inhabilitar"
+        disabled_items: "Elementos deshabilitados"
+        enable: "Habilitar"
+        top_items: "Artículos Principales"
+        top_day_for: "Día superior para"
+      show:
+        description: "Descripción"
+        current_price: "Precio actual"
+        edit_item: "Editar Artículo"

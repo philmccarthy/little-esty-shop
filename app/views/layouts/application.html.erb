@@ -23,7 +23,7 @@
 
       <div class="navbar-menu is-size-4" id="navbarData">
         <div class="navbar-start">
-          <%= link_to t('shop'), "/#{params[:lang]}", class: 'navbar-item' %>
+          <%= link_to t('shop'), "/", class: 'navbar-item' %>
           <% I18n.available_locales.each do |lang| %>
             <%= link_to lang.to_s, lang: lang %></br>
           <% end %>
