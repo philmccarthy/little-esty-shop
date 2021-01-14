@@ -22,10 +22,8 @@
 -->
 
 
-![Little Esty Shop](Add Image)
-
+![Little Esty Shop](banner.png)
 <!-- TABLE OF CONTENTS -->
-
 <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
 <ol>
   <li><a href="#about-the-project">About The Project</a>
@@ -69,9 +67,8 @@ Check out the [Project board](https://github.com/elyhess/little-esty-shop/projec
 
 <!-- DATABBASE SCHEMA -->
 ## Database Schema
-<p align="center">
-  <img src="https://github.com/elyhess/little-esty-shop/blob/main/schema1.png" />
-</p>
+
+<embed src="erd.pdf" type="application/pdf"   height="300px" width="100%">
 
 <!-- BUILT WITH -->
 ## Built With
@@ -97,7 +94,7 @@ To get a local copy up and running follow these simple steps.
    ```
    rails db:create
    rails db:migrate
-   rails load_csv:all
+   rails db:seed
    ```
 3. Run tests and view test coverage
    ```
