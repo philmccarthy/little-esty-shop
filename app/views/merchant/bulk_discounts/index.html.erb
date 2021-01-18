@@ -21,15 +21,31 @@
         <th><%= 'Reference ID' %></th>
         <th><%= 'Minimum Qty' %></th>
         <th><%= 'Percent Discount' %></th>
+        <th><%= 'Action' %></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% @merchant.bulk_discounts.each do |discount| %>
-          <td><%= link_to "##{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></td>
-          <td><%= discount.min_qty %></td>
-          <td><%= discount.pct_discount %>%</td>
-      </tr>
+      <% @merchant.bulk_discounts.each do |discount| %>
+        <tr id="discount-<%= discount.id %>">
+          <td>
+            <%= link_to "##{discount.id}",
+                merchant_bulk_discount_path(@merchant.id, discount.id)
+              %>
+          </td>
+          <td>
+            <%= discount.min_qty %>
+          </td>
+          <td>
+            <%= "#{discount.pct_discount}%" %>
+          </td>
+          <td>
+            <%= link_to 'Delete',
+                merchant_bulk_discount_path(@merchant.id, discount.id),
+                method: :delete,
+                class: 'button is-small is-danger is-light'
+              %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
