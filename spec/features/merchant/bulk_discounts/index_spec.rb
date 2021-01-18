@@ -33,5 +33,36 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
       expect(page).to have_content(@discount_3.min_qty)
       expect(page).to have_content("#{@discount_3.pct_discount}%")
     end
+
+    it 'i can delete bulk discounts' do
+      visit merchant_bulk_discounts_path(@merchant)
+
+      expect(page).to have_content(@discount_1.id)
+      expect(page).to have_content(@discount_2.id)
+      expect(page).to have_content(@discount_3.id)
+      expect(@merchant.bulk_discounts.size).to eq(3)
+
+      within("#discount-#{@discount_1.id}") do
+        click_on 'Delete'
+      end
+      expect(page).to have_content("Bulk discount was deleted successfully.")
+      expect(@merchant.bulk_discounts.size).to eq(2)
+      
+      within("#discount-#{@discount_2.id}") do
+        click_on 'Delete'
+      end
+      
+      expect(page).to_not have_content(@discount_2.id)
+      expect(page).to have_content("Bulk discount was deleted successfully.")
+      expect(@merchant.bulk_discounts.size).to eq(1)
+      
+      within("#discount-#{@discount_3.id}") do
+        click_on 'Delete'
+      end
+      
+      expect(page).to_not have_content(@discount_3.id)
+      expect(page).to have_content("Bulk discount was deleted successfully.")
+      expect(@merchant.bulk_discounts.size).to eq(0)
+    end
   end
 end
