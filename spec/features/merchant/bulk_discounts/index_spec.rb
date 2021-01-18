@@ -19,10 +19,19 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
 
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
 
-      expect(page).to have_content("Discount ##{@discount_1.id}")
-      expect(page).to have_content("Discount ##{@discount_2.id}")
-      expect(page).to have_content("Discount ##{@discount_3.id}")
+      expect(page).to have_link('Create New Discount')
+
+      expect(page).to have_link("##{@discount_1.id}")
+      expect(page).to have_content(@discount_1.min_qty)
+      expect(page).to have_content("#{@discount_1.pct_discount}%")
+
+      expect(page).to have_link("##{@discount_2.id}")
+      expect(page).to have_content(@discount_2.min_qty)
+      expect(page).to have_content("#{@discount_2.pct_discount}%")
       
+      expect(page).to have_link("##{@discount_3.id}")
+      expect(page).to have_content(@discount_3.min_qty)
+      expect(page).to have_content("#{@discount_3.pct_discount}%")
     end
   end
 end
