@@ -1,0 +1,13 @@
+<%= render 'merchant/dashboard/merchant_nav' %>
+
+<h3 class="has-text-centered">Bulk Discounts</h3>
+
+<section class="section">
+  <section class="section is-size-5 box">
+    <ul>
+      <% @merchant.bulk_discounts.each do |discount| %>
+        <li><%= link_to "Discount ##{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></li>
+      <% end %>
+    </ul>
+  </section>
+</section>
