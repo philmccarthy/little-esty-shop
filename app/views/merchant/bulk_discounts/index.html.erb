@@ -1,13 +1,36 @@
 <%= render 'merchant/dashboard/merchant_nav' %>
 
-<h3 class="has-text-centered">Bulk Discounts</h3>
-
 <section class="section">
-  <section class="section is-size-5 box">
-    <ul>
-      <% @merchant.bulk_discounts.each do |discount| %>
-        <li><%= link_to "Discount ##{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></li>
+  <div class="level">
+    <div class="level-left">
+      <p class="title level-item">
+        Your Bulk Discounts:
+      </p>
+    </div>
+    <div class="level-right">
+      <%= 
+          link_to 'Create New Discount', 
+            new_merchant_bulk_discount_path(@merchant),
+            class: 'level-item button is-primary is-light is-medium'
+        %>
+    </div>
+  </div>
+  <table class="table is-striped is-hoverable">
+    <thead>
+      <tr>
+        <th><%= 'Reference ID' %></th>
+        <th><%= 'Minimum Qty' %></th>
+        <th><%= 'Percent Discount' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @merchant.bulk_discounts.each do |discount| %>
+          <td><%= link_to "##{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></td>
+          <td><%= discount.min_qty %></td>
+          <td><%= discount.pct_discount %>%</td>
+      </tr>
       <% end %>
-    </ul>
-  </section>
+    </tbody>
+  </table>
 </section>

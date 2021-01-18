@@ -1,0 +1,13 @@
+<%= render 'merchant/dashboard/merchant_nav' %>
+
+<p class="title has-text-centered">
+  Create New Discount
+</p>
+
+<%= render partial: 'form',
+      locals: {
+                path: merchant_bulk_discounts_path(@merchant),
+                method: :post,
+                button_text: "Create Discount"
+              } 
+%>
