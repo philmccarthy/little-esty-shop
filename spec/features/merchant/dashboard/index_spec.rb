@@ -85,6 +85,7 @@ RSpec.describe 'merchant dashboard index', type: :feature do
       visit merchant_dashboard_index_path(@merchant)
       expect(page).to have_link('My Items', href: merchant_items_path(@merchant, lang: 'en'))
       expect(page).to have_link('My Invoices', href: merchant_invoices_path(@merchant, lang: 'en'))
+      expect(page).to have_link('Bulk Discounts', href: merchant_bulk_discounts_path(@merchant, lang: 'en'))
     end
 
     it 'can show top 5 customers of the merchant' do
