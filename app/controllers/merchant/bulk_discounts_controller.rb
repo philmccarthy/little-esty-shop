@@ -24,6 +24,12 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
     end
   end
 
+  def destroy
+    @bulk_discount.destroy
+    flash.notice = "Bulk discount was deleted successfully."
+    redirect_to merchant_bulk_discounts_path(@merchant)
+  end
+
   private
   def bulk_discount_params
     params.require(:bulk_discount).permit(:pct_discount, :min_qty)
