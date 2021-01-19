@@ -1,0 +1,16 @@
+<%= render partial: 'merchant/dashboard/merchant_nav' %>
+
+<p class="title has-text-centered">
+  Edit Bulk Discount
+</p>
+<p class="subtitle has-text-centered">
+  <%= "(Reference ID: #{@bulk_discount.id}" %>)
+</p>
+
+<%= render partial: 'form',
+      locals: {
+                path: merchant_bulk_discount_path(@merchant, @bulk_discount),
+                method: :patch,
+                button_text: "Save Changes"
+              } 
+%>

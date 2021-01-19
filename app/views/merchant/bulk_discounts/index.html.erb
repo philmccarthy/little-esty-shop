@@ -18,10 +18,10 @@
   <table class="table is-striped is-hoverable">
     <thead>
       <tr>
-        <th><%= 'Reference ID' %></th>
+        <th><%= 'Reference' %></th>
         <th><%= 'Minimum Qty' %></th>
-        <th><%= 'Percent Discount' %></th>
-        <th><%= 'Action' %></th>
+        <th><%= 'Discount' %></th>
+        <th><%= 'Actions' %></th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +29,7 @@
         <tr id="discount-<%= discount.id %>">
           <td>
             <%= link_to "##{discount.id}",
-                merchant_bulk_discount_path(@merchant.id, discount.id)
+                merchant_bulk_discount_path(@merchant, discount)
               %>
           </td>
           <td>
@@ -39,8 +39,12 @@
             <%= "#{discount.pct_discount}%" %>
           </td>
           <td>
+            <%= link_to 'Edit',
+                edit_merchant_bulk_discount_path(@merchant, discount),
+                class: 'button is-small is-primary is-light'
+            %>
             <%= link_to 'Delete',
-                merchant_bulk_discount_path(@merchant.id, discount.id),
+                merchant_bulk_discount_path(@merchant, discount),
                 method: :delete,
                 class: 'button is-small is-danger is-light'
               %>
