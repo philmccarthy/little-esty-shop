@@ -19,5 +19,24 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
       expect(page).to have_content(@discount_1.min_qty)
       expect(page).to have_content(@discount_1.pct_discount)
     end
+    
+    it 'when i visit the bulk discount show page i see a link to edit it and i can edit the discount' do
+      visit merchant_bulk_discount_path(@merchant, @discount_1)
+
+      expect(page).to_not have_content('60')
+      expect(page).to_not have_content('200')
+
+      click_on 'Edit Discount'
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant, @discount_1))
+
+      fill_in 'bulk_discount[pct_discount]', with: '60'
+      fill_in 'bulk_discount[min_qty]', with: '200'
+      click_on 'Save Changes'
+      
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant, @discount_1))
+      expect(page).to have_content('60')
+      expect(page).to have_content('200')
+    end
   end
 end
