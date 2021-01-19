@@ -22,6 +22,9 @@ User.destroy_all
   10.times do
     FactoryBot.create(:item, merchant: @merchant)
   end
+  [1, 2, 3].sample.times do
+    FactoryBot.create(:bulk_discount, merchant: @merchant)
+  end
   @user2 = FactoryBot.create(:user)
   @customer = FactoryBot.create(:customer, first_name: @user2.first_name, last_name: @user2.last_name, user: @user2)
   5.times do
