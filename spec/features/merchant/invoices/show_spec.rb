@@ -112,5 +112,11 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       end
     end
 
+    xit 'can show total revenue including bulk discounts' do
+      visit merchant_invoice_path(@merchant.id, @invoice_9.id)
+
+      
+    end
+
   end
 end
