@@ -11,7 +11,7 @@ RSpec.describe 'merchant new bulk discount', type: :feature do
     it 'i can create new bulk discounts' do
       visit merchant_dashboard_index_path(@merchant)
 
-      click_on 'Bulk Discounts'
+      click_on 'Discounts'
 
       expect(@merchant.bulk_discounts).to be_empty
       

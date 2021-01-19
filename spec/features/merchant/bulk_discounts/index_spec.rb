@@ -15,7 +15,7 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
     it 'i see my bulk discounts listed and they link to show pages' do
       visit merchant_dashboard_index_path(@merchant)
 
-      click_on 'Bulk Discounts'
+      click_on 'Discounts'
 
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
 
