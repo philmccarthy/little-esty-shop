@@ -64,5 +64,31 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
       expect(page).to have_content("Bulk discount was deleted successfully.")
       expect(@merchant.bulk_discounts.size).to eq(0)
     end
+
+    it 'i see a button to view the edit page for each bulk discount' do
+      visit merchant_bulk_discounts_path(@merchant)
+      
+      within("#discount-#{@discount_1.id}") do
+        click_on 'Edit'
+      end
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant, @discount_1))
+      
+      visit merchant_bulk_discounts_path(@merchant)
+      
+      within("#discount-#{@discount_2.id}") do
+        click_on 'Edit'
+      end
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant, @discount_2))
+      
+      visit merchant_bulk_discounts_path(@merchant)
+
+      within("#discount-#{@discount_3.id}") do
+        click_on 'Edit'
+      end
+
+      expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant, @discount_3))
+    end
   end
 end
