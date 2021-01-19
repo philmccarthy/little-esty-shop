@@ -24,6 +24,20 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @bulk_discount.update(bulk_discount_params)
+      flash.notice = "Discount successfully updated"
+      redirect_to merchant_bulk_discount_path(@merchant, @bulk_discount)
+    else
+      flash[:error] = @bulk_discount.errors.full_messages
+      set_bulk_discount
+      render :edit
+    end
+  end
+
   def destroy
     @bulk_discount.destroy
     flash.notice = "Bulk discount was deleted successfully."
