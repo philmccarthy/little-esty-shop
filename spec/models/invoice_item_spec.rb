@@ -25,20 +25,29 @@ RSpec.describe InvoiceItem, type: :model do
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
       
       @inv_item_1 = create(:invoice_item, item: @item, unit_price: 25, quantity: 100, invoice: @invoice_1, status: 1)
-      @inv_item_2 = create(:invoice_item, item: @item, unit_price: 25, quantity: 100, invoice: @invoice_1, status: 1)
+      @inv_item_2 = create(:invoice_item, item: @item, unit_price: 25, quantity: 110, invoice: @invoice_1, status: 1)
     end
 
     describe 'class methods' do 
       it '::find_max_discount' do
-        inv_item = InvoiceItem.find_max_discount(@inv_item_1.id)
-        expect(inv_item.discount).to eq(10)
-        expect(inv_item.unit_price).to eq(22.5)
+        inv_item_1 = InvoiceItem.find_max_discount(@inv_item_1.id)
+        expect(inv_item_1.discount).to eq(10)
+        
+        inv_item_2 = InvoiceItem.find_max_discount(@inv_item_2.id)
+        expect(inv_item_2.discount).to eq(20)
       end
     end
-
+    
     describe 'instance methods' do
-      xit '#apply_max_discount' do
-
+      it '#apply_max_discount' do
+        inv_item_1 = InvoiceItem.find_max_discount(@inv_item_1.id)
+        inv_item_1.apply_max_discount
+        expect(inv_item_1.unit_price).to eq(22.5)
+        
+        inv_item_2 = InvoiceItem.find_max_discount(@inv_item_2.id)
+        inv_item_2.apply_max_discount
+        
+        expect(inv_item_2.unit_price).to eq(20)
       end
     end
   end
