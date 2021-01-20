@@ -38,15 +38,26 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Little Esty Shop](https://immense-ocean-82455.herokuapp.com/) is a module 2 group project for Turing School of Software & Design's Back-End Engineering (BEE) program. Little Esty Shop is a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+[Little Esty Shop](https://powerful-eyrie-55286.herokuapp.com/) is a module 2 group project for Turing School of Software & Design's Back-End Engineering (BEE) program. Little Esty Shop is a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
 User stories tracked using [Github projects](https://github.com/elyhess/little-esty-shop/projects/13).
 
-### Solo Project Extension
+### Solo Project Extension _(updated 2021-01-19)_
 
-During the last week of Mod 2, I added functionality to Esty for my final project.
+During the last week of Mod 2, I added functionality to Esty for my final project. Check out [a freshly deployed instance of the app on Heroku](https://powerful-eyrie-55286.herokuapp.com/). For demo purposes, you can log into 
+an admin account: 
+  ```
+    username: admin@example.com
+    password: password
+  ```
+or a merchant account: 
 
-#### These changes are encapsulated in [Pull Request #11](https://github.com/philmccarthy/little-esty-shop/pull/11).
+  ```
+    username: luciano@zulauf.co 
+    password: strongpassword
+  ```
+
+#### Changes related to the solo project are encapsulated in [Pull Request #11](https://github.com/philmccarthy/little-esty-shop/pull/11).
 
 ### Skills Developed by Project
 * Designed schema with custom rake task for database seeding
