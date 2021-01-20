@@ -31,7 +31,7 @@
           <div id="item-<%= item.id %>">
           <td><%= item.name %></td>
           <td><%= cart.count_of(item.id) %></td>
-          <td><%= number_to_currency(item.unit_price, precision: 0) %></td>
+          <td><%= number_to_currency(item.unit_price, precision: 2) %></td>
           <td><%= link_to t('.remove_item'), "/cart/#{item.id}", method: :delete, class: 'button is-danger is-light' %></td>
           </div>
       </tr>

@@ -34,7 +34,7 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
       fill_in 'bulk_discount[min_qty]', with: '200'
       click_on 'Save Changes'
       
-      expect(current_path).to eq(merchant_bulk_discount_path(@merchant, @discount_1))
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
       expect(page).to have_content('60')
       expect(page).to have_content('200')
     end

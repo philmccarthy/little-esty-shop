@@ -100,11 +100,11 @@ RSpec.describe 'Admin Merchants Index' do
 
       visit admin_merchants_path
       within '#merchants-revenue' do
-        expect(all('#merchant')[0].text).to eq("#{@merchant_1.user_name}: $300\nTop selling day was: #{@merchant_1.best_day}")
-        expect(all('#merchant')[1].text).to eq("#{@merchant_4.user_name}: $200\nTop selling day was: #{@merchant_4.best_day}")
-        expect(all('#merchant')[2].text).to eq("#{@merchant_6.user_name}: $120\nTop selling day was: #{@merchant_6.best_day}")
-        expect(all('#merchant')[3].text).to eq("#{@merchant_5.user_name}: $100\nTop selling day was: #{@merchant_5.best_day}")
-        expect(all('#merchant')[4].text).to eq("#{@merchant_3.user_name}: $80\nTop selling day was: #{@merchant_3.best_day}")
+        expect(all('#merchant')[0].text).to eq("#{@merchant_1.user_name}: $300.00\nTop selling day was: #{@merchant_1.best_day}")
+        expect(all('#merchant')[1].text).to eq("#{@merchant_4.user_name}: $200.00\nTop selling day was: #{@merchant_4.best_day}")
+        expect(all('#merchant')[2].text).to eq("#{@merchant_6.user_name}: $120.00\nTop selling day was: #{@merchant_6.best_day}")
+        expect(all('#merchant')[3].text).to eq("#{@merchant_5.user_name}: $100.00\nTop selling day was: #{@merchant_5.best_day}")
+        expect(all('#merchant')[4].text).to eq("#{@merchant_3.user_name}: $80.00\nTop selling day was: #{@merchant_3.best_day}")
       end
     end
   end

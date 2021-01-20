@@ -1,7 +1,6 @@
 <section class="section is-size-4" id="invoice-info">
   <p><%= t('.created_on') %>: <%= @invoice.date %></p>
   <p><%= t('.total_revenue') %>: <%= number_to_currency(@invoice.total_revenue, precision: 2) %></p>
-
   <section class="section" id="customer-info">
     <p class="title"><%= t('.customer') %></p>
     <section class="section">

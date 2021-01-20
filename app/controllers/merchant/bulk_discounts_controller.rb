@@ -30,7 +30,7 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   def update
     if @bulk_discount.update(bulk_discount_params)
       flash.notice = "Discount successfully updated"
-      redirect_to merchant_bulk_discount_path(@merchant, @bulk_discount)
+      redirect_to merchant_bulk_discounts_path(@merchant)
     else
       flash[:error] = @bulk_discount.errors.full_messages
       set_bulk_discount
