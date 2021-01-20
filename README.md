@@ -65,7 +65,7 @@ or a merchant account:
 * Utilized namespacing for efficient and organized routing  
 * Practiced MVC concepts, effectively staying within rails conventions
 * Consumed github API and utilized POROS as a way to apply OOP principals  
-* Deployed application on [Heroku](https://immense-ocean-82455.herokuapp.com/)
+* Deployed application on [Heroku](https://powerful-eyrie-55286.herokuapp.com/)
 
 ### Extensions Complete
 * Session & account models with Devise Gem
@@ -99,7 +99,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```
-   git clone https://github.com/elyhess/little-esty-shop
+   git clone https://github.com/philmccarthy/little-esty-shop
    ```
 2. Install dependencies
    ```
@@ -125,7 +125,7 @@ OR
 
 1. Visit heroku
    ```
-   https://immense-ocean-82455.herokuapp.com/
+   https://powerful-eyrie-55286.herokuapp.com/
    ```
 
 1. Login
@@ -135,7 +135,7 @@ OR
    password: password
    
    User:
-   email: alberto@zulauf.org
+   email: luciano@zulauf.co 
    password: strongpassword
    ```
 
