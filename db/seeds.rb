@@ -14,6 +14,7 @@ Invoice.destroy_all
 Customer.destroy_all
 Merchant.destroy_all
 User.destroy_all
+BulkDiscount.destroy_all
 
 @user = FactoryBot.create(:user, role: 1, email: "admin@example.com", password: "password", password_confirmation: "password")
 20.times do
@@ -21,6 +22,9 @@ User.destroy_all
   @merchant = FactoryBot.create(:merchant, user_name: @user.user_name, user: @user)
   10.times do
     FactoryBot.create(:item, merchant: @merchant)
+  end
+  [1, 2, 3].sample.times do
+    FactoryBot.create(:bulk_discount, merchant: @merchant)
   end
   @user2 = FactoryBot.create(:user)
   @customer = FactoryBot.create(:customer, first_name: @user2.first_name, last_name: @user2.last_name, user: @user2)

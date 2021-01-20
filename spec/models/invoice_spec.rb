@@ -31,9 +31,8 @@ RSpec.describe Invoice, type: :model do
       @item = create(:item, merchant: @merchant)
       @invoice_1 = create(:invoice, customer: @customer_1, merchant: @merchant, status: 0, created_at: "2012-01-25 09:54:09")
       2.times do
-        create(:invoice_item, item: @item, unit_price: 25, invoice: @invoice_1, status: 1)
+        create(:invoice_item, item: @item, unit_price: 25, quantity: 1, invoice: @invoice_1, status: 1)
       end
-
 
       expect(@invoice_1.total_revenue).to eq(50)
     end

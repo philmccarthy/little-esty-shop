@@ -1,0 +1,23 @@
+<%= render partial: 'merchant/dashboard/merchant_nav' %>
+
+<section class="section has-text-centered is-size-4">
+  <p class="title">
+    Discount Reference Number:</br><%= @bulk_discount.id %>
+  </p>
+  <p>
+    <strong>
+      Minimum Quantity:
+    </strong></br>
+    <%= @bulk_discount.min_qty %> units
+  </p>
+  <p>
+    <strong>
+      Percentage Discount:
+    </strong></br>
+    <%= @bulk_discount.pct_discount %>%
+  </p>
+  <%= link_to 'Edit Discount',
+        edit_merchant_bulk_discount_path(@merchant, @bulk_discount),
+        class: 'button is-large is-primary is-light'
+  %>
+</section>

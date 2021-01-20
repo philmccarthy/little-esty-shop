@@ -26,19 +26,27 @@
         <th><%= t('.item_name')%></th>
         <th><%= t('.quantity')%></th>
         <th><%= t('.unit_price')%></th>
+        <th>Discounts</th>
         <th colspan="2"><%= t('.status')%></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% @invoice.invoice_items.each do |invitem| %>
-          <div id="status-<%= invitem.id %>">
+      <% @invoice.invoice_items.each do |invitem| %>
+        <tr id="inv-item-<%= invitem.id %>">
           <td><%= invitem.item.name %></td>
           <td><%= invitem.quantity %></td>
-          <td><%= invitem.unit_price %></td>
+          <td><%= number_to_currency(invitem.unit_price) %></td>
+
+          <% if invitem.discounted? %>
+            <td>
+            <%= "#{invitem.with_discount.discount}% — (ref. ##{invitem.with_discount.discount_applied})" %>
+            </td>
+          <% else %>
+            <td>None</td>
+          <% end %>
+
           <td><%= invitem.status.capitalize %></td>
-          </div>
-      </tr>
+        </tr>
       <% end %>
     </tbody>
   </table>

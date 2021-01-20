@@ -1,0 +1,56 @@
+<%= render 'merchant/dashboard/merchant_nav' %>
+
+<section class="section">
+  <div class="level">
+    <div class="level-left">
+      <p class="title level-item">
+        Your Bulk Discounts:
+      </p>
+    </div>
+    <div class="level-right">
+      <%= 
+          link_to 'Create New Discount', 
+            new_merchant_bulk_discount_path(@merchant),
+            class: 'level-item button is-primary is-light is-medium'
+        %>
+    </div>
+  </div>
+  <table class="table is-striped is-hoverable">
+    <thead>
+      <tr>
+        <th><%= 'Reference' %></th>
+        <th><%= 'Minimum Qty' %></th>
+        <th><%= 'Discount' %></th>
+        <th><%= 'Actions' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @merchant.bulk_discounts.each do |discount| %>
+        <tr id="discount-<%= discount.id %>">
+          <td>
+            <%= link_to "##{discount.id}",
+                merchant_bulk_discount_path(@merchant, discount)
+              %>
+          </td>
+          <td>
+            <%= discount.min_qty %>
+          </td>
+          <td>
+            <%= "#{discount.pct_discount}%" %>
+          </td>
+          <td>
+            <%= link_to 'Edit',
+                edit_merchant_bulk_discount_path(@merchant, discount),
+                class: 'button is-small is-primary is-light'
+            %>
+            <%= link_to 'Delete',
+                merchant_bulk_discount_path(@merchant, discount),
+                method: :delete,
+                class: 'button is-small is-danger is-light'
+              %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

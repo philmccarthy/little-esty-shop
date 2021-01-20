@@ -35,7 +35,7 @@
           <% @top_5_merchants.each do |merchant| %>
             <li class="block" id="merchant">
               <div class="tile is-child">
-                <p class="is-size-4"><%= merchant.user_name %>: <%= number_to_currency(merchant.total_revenue, precision: 0) %>
+                <p class="is-size-4"><%= merchant.user_name %>: <%= number_to_currency(merchant.total_revenue, precision: 2) %>
                 <p class="is-size-4" id="best-day"><%= t('.top_selling_day_was') %>: <%= merchant.best_day %></p>
               </div>
             </li>

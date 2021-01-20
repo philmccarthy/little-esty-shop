@@ -58,6 +58,9 @@ RSpec.describe 'merchants invoices index page', type: :feature do
 
       create_list(:item, 3, merchant: @merchant)
 
+      create(:bulk_discount, pct_discount: 10, min_qty: 10, merchant: @merchant)
+      create(:bulk_discount, pct_discount: 20, min_qty: 20, merchant: @merchant)
+
       5.times do
         create(:invoice_item, item: Item.first, invoice: Invoice.all.sample, status: 2)
       end
@@ -104,7 +107,7 @@ RSpec.describe 'merchants invoices index page', type: :feature do
 
     it 'can enable/disable status of item' do
       visit merchant_invoice_path(@merchant.id, @invoice_9.id)
-      within("#status-#{@invoice_9.invoice_items.first.id}") do
+      within("#inv-item-#{@invoice_9.invoice_items.first.id}") do
         select("Pending", from: "invoice_item[status]")
         click_button "Submit"
 
@@ -112,5 +115,24 @@ RSpec.describe 'merchants invoices index page', type: :feature do
       end
     end
 
+    it 'can show total revenue including bulk discounts' do
+      @invoice_7.invoice_items.destroy_all
+      new_inv_item = create(:invoice_item, item: Item.second, invoice: @invoice_7, quantity: 100, unit_price: 10.00, status: 1)
+      
+      expect(new_inv_item.unit_price).to eq(10.00)
+      new_inv_item = InvoiceItem.find(new_inv_item.id)
+      expect(new_inv_item.unit_price).to eq(8.00)
+      
+      visit merchant_invoice_path(@merchant.id, @invoice_7)
+
+      expect(page).to have_content("Total Revenue: $#{@invoice_7.total_revenue}")
+      expect(@invoice_7.total_revenue).to eq(800.00)
+      
+      
+      within("#inv-item-#{new_inv_item.id}") do
+        expect(page).to have_content(new_inv_item.with_discount.discount_id)
+        expect(page).to have_content(new_inv_item.unit_price)
+      end
+    end
   end
 end
